@@ -3,8 +3,8 @@
 #include <time.h>
 
 //  size range -> range(400, 600)
-int lower = 400;
-int upper = 600;
+int lower = 800;
+int upper = 900;
 
 int getRan(){
     return rand() % (upper-lower + 1) + lower;
@@ -52,7 +52,9 @@ void showMatrix(int** mtx, int row, int col){
 
 int main(void)
 {
-    double sTime = (double)(clock()/CLOCKS_PER_SEC);
+    clock_t sTime, eTime;
+    double time_elasped;
+    sTime = clock();
 
     srand(time(NULL));
 
@@ -79,9 +81,10 @@ int main(void)
     for (int i=0;i<m;i++) free(mtx2[i]); free(mtx2);
     for (int i=0;i<n;i++) free(mtx3[i]); free(mtx3);
     
-    double eTime = (double)(clock()/CLOCKS_PER_SEC);
-
-    printf("TIME_ELASPED: %f", eTime-sTime);
+    eTime = clock();
+    // Elasped time calculation
+    time_elasped = ((double)(eTime - sTime)) / CLOCKS_PER_SEC;
+    printf("TIME_ELASPED: %f sec. \n", time_elasped);
 
     return 0;
 }
