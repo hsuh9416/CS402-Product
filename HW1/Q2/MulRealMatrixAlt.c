@@ -33,12 +33,12 @@ double **mulMatrix(double** mtx1, double** mtx2, int _r, int _m, int _k){
     for(int k = 0;k< _r; k++) 
         matrix[k] = (double *)malloc(_k * sizeof(double));
 
-    // Allocate - Multiple(Row First) 
-    for (int i=0;i<_r;i++)
-        for (int j=0; j<_k;j++) {
-            matrix[i][j] = 0;
+    // Allocate - Multiple(Column First) 
+    for (int i=0;i<_k;i++)
+        for (int j=0; j<_r;j++) {
+            matrix[j][i] = 0;
             for(int l=0;l<_m;l++) 
-                matrix[i][j] += mtx1[i][l] * mtx2[l][j];
+                matrix[j][i] += mtx1[j][l] * mtx2[l][i];
         }
 
     return matrix;
