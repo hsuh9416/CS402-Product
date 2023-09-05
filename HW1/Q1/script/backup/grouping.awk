@@ -1,6 +1,7 @@
 #!/usr/bin/awk
 # Common awk script for both cc1.din and spice.din
 # Grouping data by deginated ranges from the previous execution(collect.awk)
+# Not used for HW1
 BEGIN{
     mix = 0;
     max = 0;
