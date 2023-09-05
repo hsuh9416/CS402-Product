@@ -55,31 +55,6 @@
                 }
             }
         },
-        { // Custom Config for Ch27
-            "label": "custom build for ch27",
-            "command": "gcc",
-            "args": [
-                "-g",
-                "${fileDirname}/*.c", // reference all c files in this folder!
-                "-o",
-                "${fileDirname}/Header"
-            ],
-            "group": "build",
-            "problemMatcher": {
-                "fileLocation": [
-                    "relative",
-                    "${workspaceRoot}"
-                ],
-                "pattern": {
-                    "regexp": "^(.*):(\\d+):(\\d+):\\s+(warning error):\\s+(.*)$",
-                    "file": 1,
-                    "line": 2,
-                    "column": 3,
-                    "severity": 4,
-                    "message": 5
-                }
-            }
-        },
         {
             "label": "execute",
             "command": "cmd",
@@ -91,7 +66,7 @@
         },
         {
             "type": "cppbuild",
-            "label": "C/C++: gcc.exe 활성 파일 빌드",
+            "label": "C/C++: gcc.exe Build",
             "command": "C:\\MinGW64\\bin\\gcc.exe",
             "args": [
                 "-g",
@@ -106,11 +81,11 @@
                 "$gcc"
             ],
             "group": "build",
-            "detail": "디버거에서 생성된 작업입니다."
+            "detail": "Job from the Debugger"
         },
         {
             "type": "cppbuild",
-            "label": "C/C++: g++.exe 활성 파일 빌드",
+            "label": "C/C++: g++.exe Build",
             "command": "C:\\MinGW64\\bin\\g++.exe",
             "args": [
                 "-g",
@@ -130,11 +105,11 @@
 //                "isDefault": true
 //            },
             
-            "detail": "디버거에서 생성된 작업입니다."
+            "detail": "Job from the Debugger."
         },
         {
             "type": "cppbuild",
-            "label": "C/C++: gcc.exe 활성 파일 빌드",
+            "label": "C/C++: gcc.exe Build",
             "command": "C:\\MinGW64\\bin\\gcc.exe",
             "args": [
                 "-g",
@@ -150,12 +125,7 @@
             ],
             "group": "build",
               
-            // "group": {
-            //     "kind": "build",
-            //     "isDefault": true
-            // },
-
-            "detail": "컴파일러: C:\\MinGW64\\bin\\gcc.exe"
+            "detail": "Complier: C:\\MinGW64\\bin\\gcc.exe"
         }
     ]
 }
