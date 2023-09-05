@@ -2,6 +2,7 @@
 #include <stdlib.h>
 #include <time.h>
 
+//  size range -> range(400, 600)
 int lower = 400;
 int upper = 600;
 
@@ -10,32 +11,32 @@ int getRan(){
 }
 
 int **genMatrix(int _r, int _c){
+    // Create
     int **matrix;
-    matrix = (int **)malloc(_r * sizeof(int *));
-    for(int k = 0;k< _r; k++) 
-        matrix[k] = (int *)malloc(_c * sizeof(int));
+    matrix = (int **)malloc(_r*sizeof(int *));
+    for(int k=0;k<_r;k++) 
+        matrix[k] = (int *)malloc(_c*sizeof(int));
 
-    for (int i = 0; i < _r; i++) 
-        for (int j = 0; j < _c; j++) {
+    // Allocate
+    for (int i =0;i<_r;i++) 
+        for (int j=0;j<_c;j++) {
             matrix[i][j] = rand();
         }
     return matrix;
 }
 
 int **mulMatrix(int** mtx1, int** mtx2, int _r, int _m, int _k){
-    // Generate frame first
+    // Create
     int **matrix;
-    matrix = (int **)malloc(_r * sizeof(int *));
+    matrix = (int **)malloc(_r*sizeof(int *));
     for(int k = 0;k< _r; k++) 
-        matrix[k] = (int *)malloc(_k * sizeof(int));
+        matrix[k] = (int *)malloc(_k*sizeof(int));
 
-    // Multiple then allocate
-
-    for (int i = 0; i < _r; i++)
-        for (int j = 0; j < _k; j++) {
+    // Allocate - Multiple
+    for (int i=0;i<_r;i++)
+        for (int j=0; j<_k;j++) {
             matrix[i][j] = 0;
-            for(int l=0; l< _m; l++) 
-                
+            for(int l=0;l<_m;l++) 
                 matrix[i][j] += mtx1[i][l] * mtx2[l][j];
         }
 
@@ -43,14 +44,16 @@ int **mulMatrix(int** mtx1, int** mtx2, int _r, int _m, int _k){
 }
 
 void showMatrix(int** mtx, int row, int col){
-    for (int i = 0; i < row; i++){
-        for (int j = 0; j < col; j++) printf("%d ", mtx[i][j]);
+    for (int i=0;i<row;i++){
+        for (int j=0; j<col;j++) printf("%d ", mtx[i][j]);
         printf("\n");
     }
 }
 
 int main(void)
 {
+    double sTime = (double)(clock()/CLOCKS_PER_SEC);
+
     srand(time(NULL));
 
     int n = getRan(); // Row of first matrix
@@ -65,29 +68,21 @@ int main(void)
         k = getRan();
     } while(m == k); 
 
-    // # Test Code
-    // int n = 1; // Row of first matrix
-    // int m = 2; // Column of first matrix & Row of second matrix
-    // int k = 3; // Column of second matrix
-
-    int **mtx1 = genMatrix(n, m);
-    // showMatrix(mtx1, n, m);
-    printf("\n");
-    int **mtx2 = genMatrix(m, k);
-    // showMatrix(mtx2, m, k);
-    printf("\n");
-    int **mtx3 = mulMatrix(mtx1, mtx2, n, m, k);
+    int **mtx1 = genMatrix(n, m); // First matrix
+    int **mtx2 = genMatrix(m, k); // Second matrix
+    int **mtx3 = mulMatrix(mtx1, mtx2, n, m, k); // Product matrix
     // showMatrix(mtx3, n, k);
-    printf("\n");
 
-    for (int i = 0; i < n; i++) free(mtx1[i]);
-    free(mtx1);
-    for (int i = 0; i < m; i++) free(mtx2[i]);
-    free(mtx2);
-    for (int i = 0; i < n; i++) free(mtx3[i]);
-    free(mtx3
-    );
+
+    // free from memory
+    for (int i=0;i<n;i++) free(mtx1[i]); free(mtx1);
+    for (int i=0;i<m;i++) free(mtx2[i]); free(mtx2);
+    for (int i=0;i<n;i++) free(mtx3[i]); free(mtx3);
     
+    double eTime = (double)(clock()/CLOCKS_PER_SEC);
+
+    printf("TIME_ELASPED: %f", eTime-sTime);
+
     return 0;
 }
 
