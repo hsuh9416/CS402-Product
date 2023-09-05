@@ -77,7 +77,7 @@ int main(void)
     // showMatrix(mtx2, m, k);
     printf("\n");
     int **mtx3 = mulMatrix(mtx1, mtx2, n, m, k);
-    showMatrix(mtx3, n, k);
+    // showMatrix(mtx3, n, k);
     printf("\n");
 
     for (int i = 0; i < n; i++) free(mtx1[i]);

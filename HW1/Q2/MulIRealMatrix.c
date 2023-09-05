@@ -9,25 +9,26 @@ int getRan(){
     return rand() % (upper-lower + 1) + lower;
 }
 
-int **genMatrix(int _r, int _c){
-    int **matrix;
-    matrix = (int **)malloc(_r * sizeof(int *));
+double **genMatrix(int _r, int _c){
+    double **matrix;
+    matrix = (double **)malloc(_r * sizeof(double *));
     for(int k = 0;k< _r; k++) 
-        matrix[k] = (int *)malloc(_c * sizeof(int));
+        matrix[k] = (double *)malloc(_c * sizeof(double));
 
     for (int i = 0; i < _r; i++) 
         for (int j = 0; j < _c; j++) {
-            matrix[i][j] = rand();
+            matrix[i][j] = (double)rand();
         }
     return matrix;
 }
 
-int **mulMatrix(int** mtx1, int** mtx2, int _r, int _m, int _k){
+double **mulMatrix(double** mtx1, double** mtx2, int _r, int _m, int _k){
     // Generate frame first
-    int **matrix;
-    matrix = (int **)malloc(_r * sizeof(int *));
+    double **matrix;
+    matrix = (double **)malloc(_r * sizeof(double *))
+    ;
     for(int k = 0;k< _r; k++) 
-        matrix[k] = (int *)malloc(_k * sizeof(int));
+        matrix[k] = (double *)malloc(_k * sizeof(double));
 
     // Multiple then allocate
 
@@ -42,9 +43,9 @@ int **mulMatrix(int** mtx1, int** mtx2, int _r, int _m, int _k){
     return matrix;
 }
 
-void showMatrix(int** mtx, int row, int col){
+void showMatrix(double** mtx, int row, int col){
     for (int i = 0; i < row; i++){
-        for (int j = 0; j < col; j++) printf("%d ", mtx[i][j]);
+        for (int j = 0; j < col; j++) printf("%f ", mtx[i][j]);
         printf("\n");
     }
 }
@@ -70,14 +71,14 @@ int main(void)
     // int m = 2; // Column of first matrix & Row of second matrix
     // int k = 3; // Column of second matrix
 
-    int **mtx1 = genMatrix(n, m);
+    double **mtx1 = genMatrix(n, m);
     // showMatrix(mtx1, n, m);
     printf("\n");
-    int **mtx2 = genMatrix(m, k);
+    double **mtx2 = genMatrix(m, k);
     // showMatrix(mtx2, m, k);
     printf("\n");
-    int **mtx3 = mulMatrix(mtx1, mtx2, n, m, k);
-    showMatrix(mtx3, n, k);
+    double **mtx3 = mulMatrix(mtx1, mtx2, n, m, k);
+    // showMatrix(mtx3, n, k);
     printf("\n");
 
     for (int i = 0; i < n; i++) free(mtx1[i]);
