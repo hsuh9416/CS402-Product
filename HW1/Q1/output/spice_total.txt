@@ -1,0 +1,1 @@
+write=150699, read=66538, instruction=782764, total=1000001
