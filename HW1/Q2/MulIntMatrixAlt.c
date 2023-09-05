@@ -52,10 +52,6 @@ void showMatrix(int** mtx, int row, int col){
 
 int main(void)
 {
-    clock_t sTime, eTime;
-    double time_elasped;
-    sTime = clock();
-
     srand(time(NULL));
 
     int n = getRan(); // Row of first matrix
@@ -79,11 +75,6 @@ int main(void)
     for (int i=0;i<n;i++) free(mtx1[i]); free(mtx1);
     for (int i=0;i<m;i++) free(mtx2[i]); free(mtx2);
     for (int i=0;i<n;i++) free(mtx3[i]); free(mtx3);
-    
-    eTime = clock();
-    // Elasped time calculation
-    time_elasped = ((double)(eTime - sTime)) / CLOCKS_PER_SEC;
-    printf("TIME_ELASPED: %f sec. \n", time_elasped);
 
     return 0;
 }
