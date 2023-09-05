@@ -32,7 +32,7 @@ int **mulMatrix(int** mtx1, int** mtx2, int _r, int _m, int _k){
     for(int k = 0;k< _r; k++) 
         matrix[k] = (int *)malloc(_k*sizeof(int));
 
-    // Allocate - Multiple
+    /// Allocate - Multiple(Row First) 
     for (int i=0;i<_r;i++)
         for (int j=0; j<_k;j++) {
             matrix[i][j] = 0;
@@ -75,7 +75,6 @@ int main(void)
     int **mtx3 = mulMatrix(mtx1, mtx2, n, m, k); // Product matrix
     // showMatrix(mtx3, n, k);
 
-
     // free from memory
     for (int i=0;i<n;i++) free(mtx1[i]); free(mtx1);
     for (int i=0;i<m;i++) free(mtx2[i]); free(mtx2);
@@ -88,4 +87,3 @@ int main(void)
 
     return 0;
 }
-
