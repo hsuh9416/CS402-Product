@@ -1,6 +1,7 @@
 #!/bin/bash
 # 0: init
-rm ./output/*
+mkdir -p ./output
+rm -rf ./output/*
 
 # 1: cc1.din
 
