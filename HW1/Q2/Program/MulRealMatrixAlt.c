@@ -2,7 +2,7 @@
 #include <stdlib.h>
 #include <time.h>
 
-//  size range -> range(800, 900)
+//  size range -> range(400, 600)
 int lower = 800;
 int upper = 900;
 

@@ -2,7 +2,7 @@
 #include <stdlib.h>
 #include <time.h>
 
-//  size range -> range(800, 900)
+//  size range -> range(400, 600)
 int lower = 800;
 int upper = 900;
 
@@ -10,30 +10,29 @@ int getRan(){
     return rand() % (upper-lower + 1) + lower;
 }
 
-double **genMatrix(int _r, int _c){
+int **genMatrix(int _r, int _c){
     // Create
-    double **matrix;
-    matrix = (double **)malloc(_r*sizeof(double *));
+    int **matrix;
+    matrix = (int **)malloc(_r*sizeof(int *));
     for(int k=0;k<_r;k++) 
-        matrix[k] = (double *)malloc(_c*sizeof(double));
+        matrix[k] = (int *)malloc(_c*sizeof(int));
 
     // Allocate
     for (int i =0;i<_r;i++) 
         for (int j=0;j<_c;j++) {
-            matrix[i][j] = (double)rand()/RAND_MAX;
+            matrix[i][j] = rand();
         }
     return matrix;
 }
 
-double **mulMatrix(double** mtx1, double** mtx2, int _r, int _m, int _k){
+int **mulMatrix(int** mtx1, int** mtx2, int _r, int _m, int _k){
     // Create
-    double **matrix;
-    matrix = (double **)malloc(_r * sizeof(double *))
-    ;
+    int **matrix;
+    matrix = (int **)malloc(_r*sizeof(int *));
     for(int k = 0;k< _r; k++) 
-        matrix[k] = (double *)malloc(_k * sizeof(double));
+        matrix[k] = (int *)malloc(_k*sizeof(int));
 
-    // Allocate - Multiple(Row First) 
+    /// Allocate - Multiple(Row First) 
     for (int i=0;i<_r;i++)
         for (int j=0; j<_k;j++) {
             matrix[i][j] = 0;
@@ -44,9 +43,9 @@ double **mulMatrix(double** mtx1, double** mtx2, int _r, int _m, int _k){
     return matrix;
 }
 
-void showMatrix(double** mtx, int row, int col){
+void showMatrix(int** mtx, int row, int col){
     for (int i=0;i<row;i++){
-        for (int j=0; j<col;j++) printf("%f ", mtx[i][j]);
+        for (int j=0; j<col;j++) printf("%d ", mtx[i][j]);
         printf("\n");
     }
 }
@@ -67,9 +66,9 @@ int main(void)
         k = getRan();
     } while(m == k); 
 
-    double **mtx1 = genMatrix(n, m);
-    double **mtx2 = genMatrix(m, k);
-    double **mtx3 = mulMatrix(mtx1, mtx2, n, m, k);
+    int **mtx1 = genMatrix(n, m); // First matrix
+    int **mtx2 = genMatrix(m, k); // Second matrix
+    int **mtx3 = mulMatrix(mtx1, mtx2, n, m, k); // Product matrix
     // showMatrix(mtx3, n, k);
 
     // free from memory

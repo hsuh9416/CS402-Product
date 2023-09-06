@@ -2,7 +2,7 @@
 #include <stdlib.h>
 #include <time.h>
 
-//  size range -> range(800, 900)
+//  size range -> range(400, 600)
 int lower = 800;
 int upper = 900;
 
@@ -32,12 +32,12 @@ int **mulMatrix(int** mtx1, int** mtx2, int _r, int _m, int _k){
     for(int k = 0;k< _r; k++) 
         matrix[k] = (int *)malloc(_k*sizeof(int));
 
-    /// Allocate - Multiple(Row First) 
-    for (int i=0;i<_r;i++)
-        for (int j=0; j<_k;j++) {
-            matrix[i][j] = 0;
+    // Allocate - Multiple(Column First) 
+    for (int i=0;i<_k;i++)
+        for (int j=0; j<_r;j++) {
+            matrix[j][i] = 0;
             for(int l=0;l<_m;l++) 
-                matrix[i][j] += mtx1[i][l] * mtx2[l][j];
+                matrix[j][i] += mtx1[j][l] * mtx2[l][i];
         }
 
     return matrix;
@@ -75,6 +75,6 @@ int main(void)
     for (int i=0;i<n;i++) free(mtx1[i]); free(mtx1);
     for (int i=0;i<m;i++) free(mtx2[i]); free(mtx2);
     for (int i=0;i<n;i++) free(mtx3[i]); free(mtx3);
-    
+
     return 0;
 }

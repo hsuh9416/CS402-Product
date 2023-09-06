@@ -1,0 +1,60 @@
+$StartMs = (Get-Date)
+gcc -o MulRealMatrixAlt.exe ./MulRealMatrixAlt.c 
+./MulRealMatrixAlt.exe
+$EndMs = (Get-Date)
+$timeSpan = $EndMs  - $StartMs
+Write-Host "[0]$($timeSpan.TotalSeconds) seconds to compile&Execute for MulRealMatrixAlt.c"
+$StartMs = (Get-Date)
+gcc -o MulRealMatrixAlt.exe ./MulRealMatrixAlt.c 
+./MulRealMatrixAlt.exe
+$EndMs = (Get-Date)
+$timeSpan = $EndMs  - $StartMs
+Write-Host "[1]$($timeSpan.TotalSeconds) seconds to compile&Execute for MulRealMatrixAlt.c"
+$StartMs = (Get-Date)
+gcc -o MulRealMatrixAlt.exe ./MulRealMatrixAlt.c 
+./MulRealMatrixAlt.exe
+$EndMs = (Get-Date)
+$timeSpan = $EndMs  - $StartMs
+Write-Host "[2]$($timeSpan.TotalSeconds) seconds to compile&Execute for MulRealMatrixAlt.c"
+$StartMs = (Get-Date)
+gcc -o MulRealMatrixAlt.exe ./MulRealMatrixAlt.c 
+./MulRealMatrixAlt.exe
+$EndMs = (Get-Date)
+$timeSpan = $EndMs  - $StartMs
+Write-Host "[3]$($timeSpan.TotalSeconds) seconds to compile&Execute for MulRealMatrixAlt.c"
+$StartMs = (Get-Date)
+gcc -o MulRealMatrixAlt.exe ./MulRealMatrixAlt.c 
+./MulRealMatrixAlt.exe
+$EndMs = (Get-Date)
+$timeSpan = $EndMs  - $StartMs
+Write-Host "[4]$($timeSpan.TotalSeconds) seconds to compile&Execute for MulRealMatrixAlt.c"
+$StartMs = (Get-Date)
+gcc -o MulRealMatrixAlt.exe ./MulRealMatrixAlt.c 
+./MulRealMatrixAlt.exe
+$EndMs = (Get-Date)
+$timeSpan = $EndMs  - $StartMs
+Write-Host "[5]$($timeSpan.TotalSeconds) seconds to compile&Execute for MulRealMatrixAlt.c"
+$StartMs = (Get-Date)
+gcc -o MulRealMatrixAlt.exe ./MulRealMatrixAlt.c 
+./MulRealMatrixAlt.exe
+$EndMs = (Get-Date)
+$timeSpan = $EndMs  - $StartMs
+Write-Host "[6]$($timeSpan.TotalSeconds) seconds to compile&Execute for MulRealMatrixAlt.c"
+$StartMs = (Get-Date)
+gcc -o MulRealMatrixAlt.exe ./MulRealMatrixAlt.c 
+./MulRealMatrixAlt.exe
+$EndMs = (Get-Date)
+$timeSpan = $EndMs  - $StartMs
+Write-Host "[7]$($timeSpan.TotalSeconds) seconds to compile&Execute for MulRealMatrixAlt.c"
+$StartMs = (Get-Date)
+gcc -o MulRealMatrixAlt.exe ./MulRealMatrixAlt.c 
+./MulRealMatrixAlt.exe
+$EndMs = (Get-Date)
+$timeSpan = $EndMs  - $StartMs
+Write-Host "[8]$($timeSpan.TotalSeconds) seconds to compile&Execute for MulRealMatrixAlt.c"
+$StartMs = (Get-Date)
+gcc -o MulRealMatrixAlt.exe ./MulRealMatrixAlt.c 
+./MulRealMatrixAlt.exe
+$EndMs = (Get-Date)
+$timeSpan = $EndMs  - $StartMs
+Write-Host "[9]$($timeSpan.TotalSeconds) seconds to compile&Execute for MulRealMatrixAlt.c"
