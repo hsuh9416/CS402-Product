@@ -19,7 +19,7 @@ main:   addu $s0, $ra, $0       # save $31 in $16
         lw $t2, var3            # load initial word of var3      
         lw $t3, var4            # load initial word of var4
         lb $t4, first           # load initial byte of first
-        lb $t5, second          # load initial byte of second 
+        lb $t5, last          # load initial byte of second 
 # breakpoint to 0x00400048 => Step 8
         sw $t3, var1            # store initial word of var4 as var1
         sw $t2, var2            # store initial word of var3 as var2
