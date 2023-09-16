@@ -14,17 +14,18 @@ last:   .byte 0x53              # First letter of last name: 'S'
         .text
         .globl main
 main:   addu $s0, $ra, $0       # save $31 in $16
-        lw $t0, var1            # load initial word of var1      
-        lw $t1, var2            # load initial word of var2      
-        lw $t2, var3            # load initial word of var3      
-        lw $t3, var4            # load initial word of var4
-        lb $t4, first           # load initial byte of first
-        lb $t5, last          # load initial byte of second 
-# breakpoint to 0x00400048 => Step 8
-        sw $t3, var1            # store initial word of var4 as var1
-        sw $t2, var2            # store initial word of var3 as var2
-        sw $t1, var3            # store initial word of var2 as var3
-        sw $t0, var4            # store initial word of val1 as var4
+# load initial word of vars
+        lw $t0, var1            # $t0 = Memory[var1]     
+        lw $t1, var2            # $t1 = Memory[var2]     
+        lw $t2, var3            # $t2 = Memory[var3]      
+        lw $t3, var4            # $t3 = Memory[var4] 
+        lb $t4, first           # $t4 = Memory[first]
+        lb $t5, last            # $t5 = Memory[last]
+# swap values between vars
+        sw $t3, var1            # Memory[var1] = $t3 = Memory[var4]
+        sw $t2, var2            # Memory[var2] = $t2 = Memory[var3]
+        sw $t1, var3            # Memory[var3] = $t1 = Memory[var2]
+        sw $t0, var4            # Memory[var4] = $t0 = Memory[var1]
 # restore now the return address in $ra and return from main
         addu $ra, $0, $s0       # return address back in $31
         jr $ra                  # return from main
