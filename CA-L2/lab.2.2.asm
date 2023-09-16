@@ -11,23 +11,20 @@ var4:   .word 0x04             # Inital value
 first:  .byte 0x48              # First letter of first name: 'H'
         .globl last
 last:   .byte 0x53              # First letter of last name: 'S'
-
         .text
         .globl main
 main:   addu $s0, $ra, $0       # save $31 in $16
-        la $t0, first
-        la $t1, last
-
-        lw $t2, var1            # load initial word of var1      
-        lw $t3, var2            # load initial word of var2      
-        lw $t4, var3            # load initial word of var3      
-        lw $t5, var4            # load initial word of var4
+        lw $t0, var1            # load initial word of var1      
+        lw $t1, var2            # load initial word of var2      
+        lw $t2, var3            # load initial word of var3      
+        lw $t3, var4            # load initial word of var4
+        lb $t4, first           # load initial byte of first
+        lb $t5, second          # load initial byte of second 
 # breakpoint to 0x00400048 => Step 8
-        sw $t5, var1            # store initial word of var4 as var1
-        sw $t4, var2            # store initial word of var3 as var2
-        sw $t3, var3            # store initial word of var2 as var3
-        sw $t2, var4            # store initial word of val1 as var4
-
+        sw $t3, var1            # store initial word of var4 as var1
+        sw $t2, var2            # store initial word of var3 as var2
+        sw $t1, var3            # store initial word of var2 as var3
+        sw $t0, var4            # store initial word of val1 as var4
 # restore now the return address in $ra and return from main
         addu $ra, $0, $s0       # return address back in $31
         jr $ra                  # return from main
