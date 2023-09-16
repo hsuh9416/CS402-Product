@@ -1,18 +1,23 @@
-        .data 0x10010000
-var1:   .word 0x55              # var1 is a word (32 bit) with the ...
-                                # initial value 0x55
-var2:   .word 0xaa
-
+        .data
+        .globl var1
+var1:   .word 8   
+        .globl var2           
+var2:   .word 7
+        .globl var3
+var3:   .word -2023
         .text
-        .globl main
-main:   addu $s0, $ra, $0       #save $31 in $16
-
-        li $t0, 7               # X = 7
-        move $t1, $t0           # register copy(not move): t0 -> t1
-        la $t2, var2            # load address 
-        lw $t3, var2            # load word
-        sw $t2, var1            # store word
-
-# restore now the return address in $ra and return from main
-        addu $ra, $0, $s0       # return address back in $31
-        jr $ra                  # return from main
+main:   
+        lw $t0, var1            # $t0 <- Memory[var1]
+        lw $t1, var2            # $t1 <- Memory[var2]
+        lw $t2, var3            # $t2 <- Memory[var3]
+        beq $t0, $t1, If        # if (var1 == var2) goto If:
+        beq $0, $0, Else        # else goto else:
+If:
+        sw $t2, var1            # $t0 = Memory[var1] <- $t2 = Memory[var3]
+        sw $t2, var2            # $t1 = Memory[var2] <- $t2 = Memory[var3]
+Else:
+        sw $t1, var1            # $t0 = Memory[var1] <- $t1 = Memory[var2]
+        sw $t0, var2            # $t1 = Memory[var2] <- $t0 = Memory[var1]
+Exit:
+        li $v0, 10                      # Set code 10(exit)
+        syscall                         # Syscall to exit
