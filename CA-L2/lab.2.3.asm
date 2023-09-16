@@ -25,10 +25,10 @@ main:
         lb $t5, 16($t0)         # $t5 = Memory[first]  
         lb $t6, 17($t0)         # $t6 = Memory[last]  
 # swap values between vars
-        sw $t4, 0($t0)          # Memory[$t0 + 0]  = Memory[var1] = $t4 = Memory[var4]
-        sw $t3, 4($t0)          # Memory[$t0 + 4]  = Memory[var2] = $t3 = Memory[var3]
-        sw $t2, 8($t0)          # Memory[$t0 + 8]  = Memory[var3] = $t2 = Memory[var2]
-        sw $t1, 12($t0)         # Memory[$t0 + 12] = Memory[var4] = $t1 = Memory[var1]
+        sw $t4, 0($t0)          # $t0 + 0  = Memory[var1] = $t4 = Memory[var4]
+        sw $t3, 4($t0)          # $t0 + 4  = Memory[var2] = $t3 = Memory[var3]
+        sw $t2, 8($t0)          # $t0 + 8  = Memory[var3] = $t2 = Memory[var2]
+        sw $t1, 12($t0)         # $t0 + 12 = Memory[var4] = $t1 = Memory[var1]
 # Exit - End of the program
         ori $v0, $0, 10         # SET code 10
         syscall                 # Syscall to exit
