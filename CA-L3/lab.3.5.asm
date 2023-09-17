@@ -24,9 +24,9 @@ main:   li $v0, 4               # system call for print_string
         addu $t1, $v0, $0       # t1 = v0 = second_number
 
         bne $t0, $t1, Near
+        # beq $0, $0, Far       # This command occurs error with wrong address.
+        j Far                   # To reach out to Far properly, Unconditionally jumps to the Far label
         
-        j Far
-
 Near:   li $v0, 4               # system call for print_string 
         la $a0, msg_near        # a0 = the massage loaded from msg_near
         syscall     
