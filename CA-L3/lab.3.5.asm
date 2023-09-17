@@ -3,7 +3,7 @@ msg1:           .asciiz "Please enter the fisrt integer number: "
 msg2:           .asciiz "Please enter the second integer number: "
 msg_far:        .asciiz "I'm far away\n"
 msg_near:       .asciiz "I'm nearby\n" 
-                .space 32768    # Add 32 KB of space to make 'Far' label far away
+
                 .text
 main:   li $v0, 4               # system call for print_string 
         la $a0, msg1            # a0 = the massage loaded from msg1
@@ -31,7 +31,7 @@ Near:   li $v0, 4               # system call for print_string
         la $a0, msg_near        # a0 = the massage loaded from msg_near
         syscall     
         j Exit
-
+        .space 32768    # Add 32 KB of space to make 'Far' label far away
 Far:    li $v0, 4               # system call for print_string 
         la $a0, msg_far         # a0 = the massage loaded from msg_far
         syscall     
