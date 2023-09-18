@@ -15,7 +15,7 @@ main:   li $v0, 4               # system call for print_string
         addu $t0, $v0, $0       # t0 = v0 = first_number
 
         li $v0, 4               # system call for print_string 
-        la $a0, msg2           # a0 = the massage loaded from msg2
+        la $a0, msg2            # a0 = the massage loaded from msg2
         syscall             
 
         li $v0, 5               # system call for read_int => read user input
@@ -31,7 +31,7 @@ Near:   li $v0, 4               # system call for print_string
         la $a0, msg_near        # a0 = the massage loaded from msg_near
         syscall     
         j Exit
-        .space 32768    # Add 32 KB of space to make 'Far' label far away
+        .space 32768            # Add 32 KB of space to make 'Far' label far away
 Far:    li $v0, 4               # system call for print_string 
         la $a0, msg_far         # a0 = the massage loaded from msg_far
         syscall     

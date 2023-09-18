@@ -16,5 +16,5 @@ If:     sw $t2, var1            # $t0 = Memory[var1] <- $t2 = Memory[var3]
 Else:   sw $t1, var1            # $t0 = Memory[var1] <- $t1 = Memory[var2]
         sw $t0, var2            # $t1 = Memory[var2] <- $t0 = Memory[var1]
 Exit:
-        li $v0, 10                      # Set code 10(exit)
-        syscall                         # Syscall to exit
+        li $v0, 10              # Set code 10(exit)
+        syscall                 # Syscall to exit
