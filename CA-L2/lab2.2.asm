@@ -13,7 +13,7 @@ first:  .byte 0x48              # First letter of first name: 'H'
 last:   .byte 0x53              # First letter of last name: 'S'
         .text
         .globl main
-main:   addu $s0, $ra, $0       # save $31 in $16
+main:   
 # load initial word of vars
         lw $t0, var1            # $t0 <- Memory[var1]     
         lw $t1, var2            # $t1 <- Memory[var2]     
@@ -26,6 +26,6 @@ main:   addu $s0, $ra, $0       # save $31 in $16
         sw $t2, var2            # $t1 = Memory[var2] <- $t2 = Memory[var3]
         sw $t1, var3            # $t2 = Memory[var3] <- $t1 = Memory[var2]
         sw $t0, var4            # $t4 = Memory[var4] <- $t0 = Memory[var1]
-# restore now the return address in $ra and return from main
-        addu $ra, $0, $s0       # return address back in $31
-        jr $ra                  # return from main
+# Exit - End of the program
+        ori $v0, $0, 10         # SET code 10
+        syscall                 # Syscall to exit
