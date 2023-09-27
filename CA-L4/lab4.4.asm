@@ -8,16 +8,17 @@ msg4:   .asciiz "\n"
         .globl main
 main:    
         # Save return address
-        add $sp, $sp, -16
-        sw $ra, 16($sp)        
+        add $sp, $sp, -4        # sp 0 -> -4
+        sw $ra, 4($sp)        
         
         # Read the first number
         li $v0, 4              
         la $a0, msg1            
         syscall             
         li $v0, 5               
-        syscall                  
-        sw $v0, 12($sp)
+        syscall     
+        add $sp, $sp, -4        # sp -4 -> -8             
+        sw $v0, 4($sp)
 
         # Read the second number   
         li $v0, 4              
@@ -25,7 +26,8 @@ main:
         syscall   
         li $v0, 5               
         syscall 
-        sw $v0, 8($sp)
+        add $sp, $sp, -4        # sp -8 -> -12   
+        sw $v0, 4($sp)
 
         # Call 'Largest'
         jal Largest             
@@ -43,14 +45,16 @@ main:
         syscall
 
         # Restore return address and return from the main
-        lw $ra, 16($sp)         
-        add $sp, $sp, 16
+        lw $ra, 8($sp)         
+        add $sp, $sp, 8        # sp -8 -> 0
         jr $ra    
 
 Largest:    
         # Pop and restore the numbers
-        lw $t0, 12($sp)  
-        lw $t1, 8($sp)
+        lw $t1, 4($sp)
+        lw $t0, 8($sp)  
+        add $sp, $sp, 4        # sp -12 -> -8 (Reseved one stack for the result value)
+        
         
         # Number compare then return the largest
         bge $t0, $t1, First    
