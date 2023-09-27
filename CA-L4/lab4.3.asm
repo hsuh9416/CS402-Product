@@ -8,8 +8,7 @@ msg4:   .asciiz "\n"
         .globl main
 main:    
         # Save return address
-        add $sp, $sp, -4
-        sw $ra, 4($sp)        
+        move $s0, $ra      
         
         # Read the first number
         li $v0, 4              
@@ -36,15 +35,14 @@ main:
         la $a0, msg3            
         syscall
         li $v0, 1                
-        move $a0, $s0
+        move $a0, $s1
         syscall
         li $v0, 4              
         la $a0, msg4            
         syscall
 
         # Restore return address and return from the main
-        lw $ra, 4($sp)         
-        add $sp, $sp, 4
+        move $ra, $s0         
         jr $ra          
 
 Largest:             
@@ -52,8 +50,8 @@ Largest:
         bge $t0, $t1, First
         j Second                 
 First:  
-        move $s0, $t0
+        move $s1, $t0
         jr $ra                  
 Second: 
-        move $s0, $t1
+        move $s1, $t1
         jr $ra                   
