@@ -8,7 +8,8 @@
         "stdlib.h": "c",
         "header2.h": "c",
         "header1.h": "c",
-        "readfile.h": "c"
+        "readfile.h": "c",
+        "workerlib.h": "c"
     },
     "cmake.configureOnOpen": false
 }
