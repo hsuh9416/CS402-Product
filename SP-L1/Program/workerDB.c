@@ -42,7 +42,7 @@ void print_DB(){
         emp_list[i].first_name, emp_list[i].last_name, emp_list[i].salary, emp_list[i].six_digit_ID); 
     }
     printf("---------------------------------------------------------------\n");
-    printf("Number of Employees (%d)\n", sizeof cur_size);
+    printf("Number of Employees (%d)\n", cur_size);
 }
 
 void find_emp_by_ID(){
@@ -58,8 +58,8 @@ void find_emp_by_ID(){
                 printf("---------------------------------------------------------------\n");
                 return;
         }
-        printf("Employee with id %d not found in DB\n", id);
     }
+    printf("Employee with id %d not found in DB\n", id);
 }
 
 void find_emp_by_LN(){
@@ -75,8 +75,8 @@ void find_emp_by_LN(){
                 printf("---------------------------------------------------------------\n");
                 return;
         }
-        printf("Employee with last name %s not found in DB\n", ln);
     }
+    printf("Employee with last name %s not found in DB\n", ln);
 }
 
 void Add_emp(){
