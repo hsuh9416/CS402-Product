@@ -73,7 +73,7 @@ void find_emp_by_ID(){
         clear_input_buffer();
         printf("Enter a 6 digit employee id: ");  
         int flag = read_int(&id);
-        if(flag || id < 10000 || id > 99999){
+        if(flag || id < MIN_ID || id > MAX_ID){
             printf("Please enter a 6 digit employee id only! ");  
         }
         else{

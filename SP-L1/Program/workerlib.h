@@ -8,6 +8,8 @@
 #define MAX_EMP  1024
 #define MIN_SALARY 30000
 #define MAX_SALARY 150000
+#define MIN_ID 100000
+#define MAX_ID 999999
 
 typedef struct {
     int six_digit_ID;
