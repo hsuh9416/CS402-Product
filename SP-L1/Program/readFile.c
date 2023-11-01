@@ -25,6 +25,15 @@ int close_file(){
     return fclose(fp);
 }
 
+int equal_to(char *x, char *y){
+    int i = 0;
+    while(x[i] != 0 && y[i] != 0){
+        if(x[i] != y[i]) return 0;
+        i++;
+    }
+    return 1;
+}
+
 FILE *get_file(){
     return fp;
 }

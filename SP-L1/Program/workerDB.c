@@ -29,6 +29,7 @@ void load_db(){
     while(1){
         ret = fscanf(fp, "%d %s %s %d",&emp.six_digit_ID, emp.first_name, emp.last_name, &emp.salary);
         if(ret==EOF) break;
+        cur_id = emp.salary;
         emp_list[cur_size++] = emp;  
     }
 
@@ -63,11 +64,11 @@ void find_emp_by_ID(){
 }
 
 void find_emp_by_LN(){
-    char last_name[MAXNAME];
+    char *last_name;
     printf("Enter Employee's last name (no extra spaces): ");  
-    scanf("%s ", last_name);
+    scanf("%s", last_name);
     for(int i=0; i < cur_size; i++){
-        if(emp_list[i].last_name == last_name){
+        if(equal_to(emp_list[i].last_name, last_name)){
                 printf("NAME                              SALARY 	     ID\n");   
                 printf("---------------------------------------------------------------\n");
                 printf("%s         %s                 %d 	     %d\n", 
@@ -83,9 +84,9 @@ void Add_emp(){
     int sel;
     Employee emp_info;
     printf("Enter the first name of the employee: ");  
-    scanf("%s\n", emp_info.first_name);
+    scanf("%s", emp_info.first_name);
     printf("Enter the last name of the employee: ");  
-    scanf("%s\n", emp_info.last_name);
+    scanf("%s", emp_info.last_name);
     printf("Enter employee's salary (30000 to 150000): ");  
     scanf("%d", &emp_info.salary);
     printf("do you want to add the following employee to the DB?\n");  
@@ -94,8 +95,7 @@ void Add_emp(){
     scanf("%d", &sel);
     if(sel == 1){
         emp_info.six_digit_ID = ++cur_id;
-        cur_size++;
-        emp_list[++cur_size] = emp_info;
+        emp_list[cur_size++] = emp_info;
     }
 }
 
