@@ -63,11 +63,11 @@ void find_emp_by_ID(){
 }
 
 void find_emp_by_LN(){
-    char ln[MAXNAME];
+    char last_name[MAXNAME];
     printf("Enter Employee's last name (no extra spaces): ");  
-    scanf("%s\n", ln);
+    scanf("%s ", last_name);
     for(int i=0; i < cur_size; i++){
-        if(emp_list[i].last_name == ln){
+        if(emp_list[i].last_name == last_name){
                 printf("NAME                              SALARY 	     ID\n");   
                 printf("---------------------------------------------------------------\n");
                 printf("%s         %s                 %d 	     %d\n", 
@@ -76,7 +76,7 @@ void find_emp_by_LN(){
                 return;
         }
     }
-    printf("Employee with last name %s not found in DB\n", ln);
+    printf("Employee with last name %s not found in DB\n", last_name);
 }
 
 void Add_emp(){
