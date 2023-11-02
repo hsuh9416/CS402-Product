@@ -32,6 +32,39 @@ int equal_to(char *x, char *y){
 }
 
 /**
+ * function swap()
+ * This function swaps given two entity.
+ * @param Employee *a, The employee struct instance that will swap with b.
+ * @param Employee *b - The employee struct instance that will swap with a.
+ * @return NONE.
+ */
+void swap(Employee *a, Employee *b) {
+    Employee temp = *a;
+    *a = *b;
+    *b = temp;
+}
+
+/**
+ * function sort_employees_by_id()
+ * This function order the list by its id.
+ * @param size Current size of the list.
+ * @return NONE.
+ */
+void sort_employees_by_id(int size) {
+    int swapped;
+    do {
+        swapped = 0;
+        for (int i = 0; i < size - 1; ++i) {
+            if (emp_list[i].six_digit_ID > emp_list[i + 1].six_digit_ID) {
+                swap(&emp_list[i], &emp_list[i + 1]);
+                swapped = 1;
+            }
+        }
+        size--; // Decrease the size because the last element is already in place
+    } while (swapped);
+}
+
+/**
  * function load_db()
  * This function load data from file to the Employee list =(array of Struct Employee).
  * @param char *fn - the String value(or pointer of char/ array of char) that represents the file name to read.
@@ -50,9 +83,13 @@ int load_db(char *fn){
         if(ret==EOF) break; // No more data
         emp_list[cur_size++] = emp;  
     }
+    
+    sort_employees_by_id(cur_size); // sort the file
+
     cur_id = emp_list[cur_size-1].six_digit_ID; // Set maximum current id.
     close_file(); // Close the file have finished reading.
-    
+
+
     return 1;
 }
 

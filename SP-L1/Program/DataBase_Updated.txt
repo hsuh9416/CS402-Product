@@ -17,6 +17,4 @@
 935460 Heather James 98000
 970016 Russ Vorobiev 109000
 998447 Barbara Liskov 75000
-998448 haeun suh 111222
-998449 ddochi bird 30001
-998450 gagamel cat 149999
+998448 Haeun Suh 121212
