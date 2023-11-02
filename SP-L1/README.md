@@ -8,6 +8,7 @@ SP Lab 01 product
 - readFile.h / readFile.c: Contains I/O related functions.
 - workerlib.h / workerlib.c: Contains requirement of the homework.
 - workerdb.c: Contains main function and run function named 'menu()'.
+- workerdb.exe: Executable file. Needs 'database file path' as a argument.
 - All the external function have been linked by their headers.
 # How to work
 - Enter code below from the 'Program' directory that stores all relevant data.
