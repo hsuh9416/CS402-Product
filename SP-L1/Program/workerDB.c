@@ -30,6 +30,7 @@ int menu(){
             Add_emp();
             break;
         case 5:
+            save_db();
             printf("goodbye!\n");  
             quit = 1;
             break;         

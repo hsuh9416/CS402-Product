@@ -18,6 +18,7 @@ typedef struct {
     int salary;
 } Employee;
 
+Employee get_emp_list();
 int load_db(char *fn);
 
 void print_DB();
@@ -25,8 +26,6 @@ void find_emp_by_ID();
 void find_emp_by_LN();
 void Add_emp();
 
-int equal_to(char *x, char *y);
-Employee get_emp_list();
-
+int save_db();
 
 #endif
