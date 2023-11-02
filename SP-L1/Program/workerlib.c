@@ -86,7 +86,7 @@ void find_emp_by_ID(){
         printf("Enter a 6 digit employee id: ");  
         int flag = read_int(&emp_info.six_digit_ID);
         if(flag || emp_info.six_digit_ID < MIN_ID || emp_info.six_digit_ID > MAX_ID){
-            printf("Please enter a 6 digit employee id only! ");  
+            printf("Please enter a 6 digit employee id only!");  
             clear_input_buffer();
         }
         else{
@@ -108,13 +108,12 @@ void find_emp_by_ID(){
 
 /**
  * function find_emp_by_LN()
- * This function search the target employee by their last name. Multiple result available.
+ * This function search the target employee by their last name.
  * @param NONE
  * @return NONE
  */
 void find_emp_by_LN(){
     Employee emp_info;
-    int cnt = 0;
     printf("Enter Employee's last name (no extra spaces): ");  
     read_string(emp_info.last_name);
     clear_input_buffer(); // Remove any exceeding characters
@@ -126,14 +125,11 @@ void find_emp_by_LN(){
             }
             printf("%-20s %-20s %10d %10d\n", 
             emp_list[i].first_name, emp_list[i].last_name, emp_list[i].salary, emp_list[i].six_digit_ID); 
-            cnt++;
+            printf("---------------------------------------------------------------\n");
+            return;
         }
     }
-    if(cnt > 0) {
-        printf("---------------------------------------------------------------\n");
-        printf("Number of Result (%d)\n", cnt);
-    }
-    else printf("Employee with last name %s not found in DB\n", emp_info.last_name);
+    printf("Employee with last name %s not found in DB\n", emp_info.last_name);
 }
 
 void Add_emp(){
