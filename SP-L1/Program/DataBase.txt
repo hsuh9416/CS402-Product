@@ -12,6 +12,7 @@
 702234 Jean Jones 94000
 784372 Dana Parrish 87000
 786785 Ann Coddington 82000
+800000 Petty Jones 60000
 849387 Melissa Dufour 114000
 935460 Heather James 98000
 970016 Russ Vorobiev 109000 

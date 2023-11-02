@@ -1,14 +1,27 @@
+// This file contains job list-related manipulation functions.
 #include "workerlib.h"
 
-int cur_id = 0;
-int cur_size = 0;
+int cur_id = 0; // maximum id number from current Employee list.
+int cur_size = 0; // maximum size of current Employee list.
 
-static Employee emp_list[MAX_EMP];
+static Employee emp_list[MAX_EMP]; // Employee list instance.
 
+/**
+ * function get_emp_list()
+ * This function is accessor of the employee list. 
+ * @param NONE
+ * @return Array of Employee.
+ */
 Employee get_emp_list(){
     return emp_list[MAX_EMP];
 }
 
+/**
+ * function equal_to()
+ * This function determines whether two strings are the same and returns a result.
+ * @param char *x, char *y - Two string(or pointer of char/ array of char) to be compared.
+ * @return returns 1 when it was the equal, 0 when it was different.
+ */
 int equal_to(char *x, char *y){
     int i = 0;
     while(x[i] != 0 && y[i] != 0){
@@ -18,26 +31,37 @@ int equal_to(char *x, char *y){
     return 1;
 }
 
+/**
+ * function load_db()
+ * This function load data from file to the Employee list =(array of Struct Employee).
+ * @param char *fn - the String value(or pointer of char/ array of char) that represents the file name to read.
+ * @return returns 1 when successful 0 when failed.
+ */
 int load_db(char *fn){
-    if(open_file(fn) == -1){
+    if(open_file(fn) == -1){ // File error
         printf("Error opening file: %s\n", fn);
         return 0;
     }
     Employee emp;
     int ret;
     FILE *fp = get_file();
-    while(1){
+    while(1){ // ID, First Name, Last Name, Salary
         ret = fscanf(fp, "%d %s %s %d",&emp.six_digit_ID, emp.first_name, emp.last_name, &emp.salary);
-        if(ret==EOF) break;
-
+        if(ret==EOF) break; // No more data
         emp_list[cur_size++] = emp;  
     }
-    cur_id = emp_list[cur_size-1].six_digit_ID;
-    close_file(); // Close the file ended reading.
+    cur_id = emp_list[cur_size-1].six_digit_ID; // Set maximum current id.
+    close_file(); // Close the file have finished reading.
     
     return 1;
 }
 
+/**
+ * function print_DB()
+ * This function prints the current employee present in the list.
+ * @param NONE
+ * @return NONE
+ */
 void print_DB(){
     printf("%20s %20s %-10s %-10s\n", "\t NAME", ""," SALARY", "\t ID"); 
     printf("---------------------------------------------------------------\n");
@@ -49,10 +73,16 @@ void print_DB(){
     printf("Number of Employees (%d)\n", cur_size);
 }
 
+/**
+ * function find_emp_by_ID()
+ * This function search the target employee by their id.
+ * @param NONE
+ * @return NONE
+ */
 void find_emp_by_ID(){
     Employee emp_info;
 
-    while(1){
+    while(1){ // Repeat until get the right input
         printf("Enter a 6 digit employee id: ");  
         int flag = read_int(&emp_info.six_digit_ID);
         if(flag || emp_info.six_digit_ID < MIN_ID || emp_info.six_digit_ID > MAX_ID){
@@ -60,7 +90,6 @@ void find_emp_by_ID(){
             clear_input_buffer();
         }
         else{
-
             for(int i=0; i < cur_size; i++){
                 if(emp_list[i].six_digit_ID == emp_info.six_digit_ID){
                         printf("%20s %20s %-10s %-10s\n", "\t NAME", ""," SALARY", "\t ID"); 
@@ -75,11 +104,17 @@ void find_emp_by_ID(){
             return;
         }
     }
-
 }
 
+/**
+ * function find_emp_by_LN()
+ * This function search the target employee by their last name. Multiple result available.
+ * @param NONE
+ * @return NONE
+ */
 void find_emp_by_LN(){
     char *last_name;
+    int cnt = 0;
     printf("Enter Employee's last name (no extra spaces): ");  
     read_string(last_name);
     clear_input_buffer(); // Remove any exceeding characters
@@ -93,9 +128,13 @@ void find_emp_by_LN(){
             }
                 printf("%-20s %-20s %10d %10d\n", 
                 emp_list[i].first_name, emp_list[i].last_name, emp_list[i].salary, emp_list[i].six_digit_ID); 
+                cnt++;
         }
     }
-    if(existed) printf("---------------------------------------------------------------\n");
+    if(existed) {
+        printf("---------------------------------------------------------------\n");
+        printf("Number of Result (%d)\n", cnt);
+    }
     else ("Employee with last name %s not found in DB\n", last_name);
 }
 
@@ -153,7 +192,13 @@ void Add_emp(){
     else printf("The process has canceled with no modification.\n");
 }
 
-int save_db(){
+/**
+ * function save_db()
+ * This function saves the current list to a file according to the user's selection.
+ * @param NONE
+ * @return NONE
+ */
+void save_db(){
     int sel;
     printf("do you want to save the database?\n");  
     printf("Enter 1 for yes, else for no:");
@@ -163,20 +208,17 @@ int save_db(){
         // Attempt to open the file for writing (this will also clear the file if it exists)
         FILE* outfile = fopen("DataBase_Updated.txt", "wt");
         if (outfile == NULL) {
-            perror("Error opening file for writing. Saving failed");
-            return -1; // Return an error code if file opening failed
-        }  
-        for(int i = 0; i < cur_size; i++){
-            fwrite(&emp_list[i], sizeof(emp_list[i]), 1, outfile);
+            printf("Error opening file for writing. Saving failed.\n");
+            fclose(outfile); // Just in case.
         }
-        fclose(outfile); // Close the file after writing
-        printf("Database saved successfully.\n");
-        return 1; // Return success code
+        else{
+            for(int i = 0; i < cur_size; i++){
+                fwrite(&emp_list[i], sizeof(emp_list[i]), 1, outfile);
+            }
+            fclose(outfile); // Close the file after writing
+            printf("Database saved successfully.\n");
+            return;
+        }
     } 
-    else {
-        printf("Terminated without saving. Any modifications will not reflect in the future.\n");  
-        return 0; // Return a different code for no save
-    }
-
-    return 0;
+    printf("Terminated without saving. Any modifications will not reflect in the future.\n");  
 }
