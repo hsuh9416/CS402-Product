@@ -119,10 +119,8 @@ void find_emp_by_LN(){
     clear_input_buffer(); // Remove any exceeding characters
     for(int i=0; i < cur_size; i++){
         if(equal_to(emp_list[i].last_name, emp_info.last_name)){
-            if(cnt == 0){
-                printf("%20s %20s %-10s %-10s\n", "\t NAME", ""," SALARY", "\t ID"); 
-                printf("---------------------------------------------------------------\n");
-            }
+            printf("%20s %20s %-10s %-10s\n", "\t NAME", ""," SALARY", "\t ID"); 
+            printf("---------------------------------------------------------------\n");
             printf("%-20s %-20s %10d %10d\n", 
             emp_list[i].first_name, emp_list[i].last_name, emp_list[i].salary, emp_list[i].six_digit_ID); 
             printf("---------------------------------------------------------------\n");
