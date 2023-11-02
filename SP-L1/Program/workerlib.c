@@ -113,29 +113,27 @@ void find_emp_by_ID(){
  * @return NONE
  */
 void find_emp_by_LN(){
-    char *last_name;
+    Employee emp_info;
     int cnt = 0;
     printf("Enter Employee's last name (no extra spaces): ");  
-    read_string(last_name);
+    read_string(emp_info.last_name);
     clear_input_buffer(); // Remove any exceeding characters
-    int existed = 0;
     for(int i=0; i < cur_size; i++){
-        if(equal_to(emp_list[i].last_name, last_name)){
-            if(!existed){
+        if(equal_to(emp_list[i].last_name, emp_info.last_name)){
+            if(cnt == 0){
                 printf("%20s %20s %-10s %-10s\n", "\t NAME", ""," SALARY", "\t ID"); 
                 printf("---------------------------------------------------------------\n");
-                existed = 1;
             }
-                printf("%-20s %-20s %10d %10d\n", 
-                emp_list[i].first_name, emp_list[i].last_name, emp_list[i].salary, emp_list[i].six_digit_ID); 
-                cnt++;
+            printf("%-20s %-20s %10d %10d\n", 
+            emp_list[i].first_name, emp_list[i].last_name, emp_list[i].salary, emp_list[i].six_digit_ID); 
+            cnt++;
         }
     }
-    if(existed) {
+    if(cnt > 0) {
         printf("---------------------------------------------------------------\n");
         printf("Number of Result (%d)\n", cnt);
     }
-    else ("Employee with last name %s not found in DB\n", last_name);
+    else printf("Employee with last name %s not found in DB\n", emp_info.last_name);
 }
 
 void Add_emp(){
@@ -213,7 +211,9 @@ void save_db(){
         }
         else{
             for(int i = 0; i < cur_size; i++){
-                fwrite(&emp_list[i], sizeof(emp_list[i]), 1, outfile);
+                fprintf(outfile, "%d %s %s %d\n",
+                    emp_list[i].six_digit_ID, emp_list[i].first_name, emp_list[i].last_name, emp_list[i].salary);
+                // fwrite((void*)&emp_list[i], sizeof(Employee), 1, outfile);
             }
             fclose(outfile); // Close the file after writing
             printf("Database saved successfully.\n");
