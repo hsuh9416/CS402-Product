@@ -146,13 +146,16 @@ void find_emp_by_ID(){
 /**
  * function find_emp_by_LN()
  * This function search the target employee by their last name.
- * @param NONE
+ * @param search_all Integer number corresponding the boolean(0, 1) to:
+ *          True(1): Search all employees that have the same last name
+ *          False(0): Search only the first employee whose last name has been matched. 
  * @return NONE
  */
-void find_emp_by_LN(){
+void find_emp_by_LN(int search_all){
     Employee emp_info;
     printf("Enter Employee's last name (no extra spaces): ");  
     read_string(emp_info.last_name);
+    int flag = 0;
     clear_input_buffer(); // Remove any exceeding characters
     for(int i=0; i < cur_size; i++){
         if(equal_to(emp_list[i].last_name, emp_info.last_name)){
@@ -160,14 +163,24 @@ void find_emp_by_LN(){
             printf("---------------------------------------------------------------\n");
             printf("%-20s %-20s %10d %10d\n", 
             emp_list[i].first_name, emp_list[i].last_name, emp_list[i].salary, emp_list[i].six_digit_ID); 
-            printf("---------------------------------------------------------------\n");
-            return;
+            if(!search_all){
+                printf("---------------------------------------------------------------\n");
+                return;
+            }
+            if(!flag) flag = 1; // At least one employee existed.
         }
     }
-    printf("Employee with last name %s not found in DB\n", emp_info.last_name);
+    (flag) ? printf("---------------------------------------------------------------\n") 
+    : printf("Employee with last name %s not found in DB\n", emp_info.last_name);
 }
 
-void Add_emp(){
+/**
+ * function add_emp()
+ * This function adds the new employee to the list by user input.
+ * @param NONE
+ * @return NONE
+ */
+void add_emp(){
     int sel;
     int flag = 0;
 
@@ -219,6 +232,36 @@ void Add_emp(){
         printf("Employee added successfully with ID %d\n", emp_info.six_digit_ID);
     } 
     else printf("The process has canceled with no modification.\n");
+}
+
+/**
+ * function remove_emp()
+ * This function removes the existing employee by user input
+ * @param NONE
+ * @return NONE
+ */
+void remove_emp(){
+
+}
+
+/**
+ * function update_emp()
+ * This function removes the existing employee from the list by user input.
+ * @param NONE
+ * @return NONE
+ */
+void update_emp(){
+
+}
+
+/**
+ * function print_top_m_sal()
+ * This function prints the employees with the highest salaries as many as the user requested number.
+ * @param NONE
+ * @return NONE
+ */
+void print_top_m_sal(){
+
 }
 
 /**

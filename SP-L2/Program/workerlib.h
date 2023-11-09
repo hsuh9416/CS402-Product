@@ -25,8 +25,11 @@ int load_db(char *fn);
 
 void print_DB();
 void find_emp_by_ID();
-void find_emp_by_LN();
-void Add_emp();
+void find_emp_by_LN(int search_all);
+void add_emp();
+void remove_emp();
+void update_emp();
+void print_top_m_sal();
 
 void save_db();
 
