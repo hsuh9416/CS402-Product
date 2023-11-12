@@ -64,13 +64,14 @@ void sort_employees_by_id(int size) {
     } while (swapped);
 }
 
+
 /**
  * function load_db()
  * This function load data from file to the Employee list =(array of Struct Employee).
  * @param char *fn - the String value(or pointer of char/ array of char) that represents the file name to read.
  * @return returns 1 when successful 0 when failed.
  */
-int load_db(char *fn){
+int load_DB(char *fn){
     if(open_file(fn) == -1){ // File error
         printf("Error opening file: %s\n", fn);
         return 0;
@@ -84,14 +85,14 @@ int load_db(char *fn){
         emp_list[cur_size++] = emp;  
     }
     
-    sort_employees_by_id(cur_size); // sort the file
+    sort_employees_by_id(cur_size); // Order by ID ascendant
 
     cur_id = emp_list[cur_size-1].six_digit_ID; // Set maximum current id.
     close_file(); // Close the file have finished reading.
 
-
     return 1;
 }
+
 
 /**
  * function print_DB()

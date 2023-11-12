@@ -38,7 +38,7 @@ int menu(){
             find_emp_by_LN(0); // Search by last name
             break;
         case 4:
-            Add_emp(); // Add new employee
+            add_emp(); // Add new employee
             break;
         case 5:
             save_db(); // Save the list to file
@@ -72,7 +72,7 @@ int main(int argc, char *argv[])
         return 1;
     }
 
-    if(load_db(argv[1]) == 0) return 1; // load db
+    if(load_DB(argv[1]) == 0) return 1; // load db
 
     int quit = 0;
     while(!quit){// Loop until request quit;

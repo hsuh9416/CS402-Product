@@ -21,7 +21,7 @@ typedef struct {
 } Employee;
 
 Employee get_emp_list();
-int load_db(char *fn);
+int load_DB(char *fn);
 
 void print_DB();
 void find_emp_by_ID();
