@@ -20,6 +20,11 @@ typedef struct {
     int salary;
 } Employee;
 
+// This enum represents the option for the ordering array
+typedef enum {
+    ID, SALARY
+} Orderby;
+
 Employee get_emp_list();
 int load_DB(char *fn);
 
