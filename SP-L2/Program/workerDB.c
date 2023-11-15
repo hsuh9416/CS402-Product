@@ -13,7 +13,7 @@ int menu(){
     int sel, quit = 0;
 
     printf("Employee DB Menu:\n");
-    printf("----------------------------------\n");
+    printf("------------------------------------------------------\n");
     printf("(1) Print the Database\n");
     printf("(2) Lookup by ID\n");
     printf("(3) Lookup by Last Name\n");
@@ -23,7 +23,7 @@ int menu(){
     printf("(7) Update an employee's information\n"); 
     printf("(8) Print the M employees with the highest salaries\n"); 
     printf("(9) Find all employees with matching last name\n"); 
-    printf("----------------------------------\n");
+    printf("------------------------------------------------------\n");
     printf("Enter your choice: ");
     scanf("%d", &sel);
     switch (sel)
@@ -35,7 +35,7 @@ int menu(){
             find_emp_by_ID(); // Search by id
             break;
         case 3:
-            find_emp_by_LN(0); // Search by last name
+            find_emp_by_LN(0); // Search by last name(single)
             break;
         case 4:
             save_emp(0, -1); // Add new employee
@@ -55,7 +55,7 @@ int menu(){
             print_top_m_sal(); // Print the M employees with the highest salaries
             break;    
         case 9:
-            find_emp_by_LN(1); // Search by last name
+            find_emp_by_LN(1); // Search by last name(multiple)
             break; 
         default:
             printf("Hey, %d is not between 1 and 9, try again...\n", &sel); // Recieved invalid input

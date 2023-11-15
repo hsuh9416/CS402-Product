@@ -140,20 +140,31 @@ int load_DB(char *fn){
 }
 
 /**
+ * function print_emp()
+ * This function is shared function to print the given list of employees.
+ * @param Employee emps - The array of struct type Employee.
+ * @param int size - The size of the given array.
+ * @return NONE
+ */
+void print_emp(Employee emps[], int size){
+    printf("%20s %20s %-10s %-10s\n", "\t NAME", ""," SALARY", "\t ID"); 
+    printf("---------------------------------------------------------------\n");
+    for(int i=0; i < size; i++){
+        printf("%-20s %-20s %10d %10d\n", 
+        emps[i].first_name, emps[i].last_name, emps[i].salary, emps[i].six_digit_ID); 
+    }
+    printf("---------------------------------------------------------------\n");
+    printf("Number of Employees (%d)\n\n", size);
+}
+
+/**
  * function print_DB()
  * This function prints the current employee present in the list.
  * @param NONE
  * @return NONE
  */
 void print_DB(){
-    printf("%20s %20s %-10s %-10s\n", "\t NAME", ""," SALARY", "\t ID"); 
-    printf("---------------------------------------------------------------\n");
-    for(int i=0; i < cur_size; i++){
-        printf("%-20s %-20s %10d %10d\n", 
-        emp_list[i].first_name, emp_list[i].last_name, emp_list[i].salary, emp_list[i].six_digit_ID); 
-    }
-    printf("---------------------------------------------------------------\n");
-    printf("Number of Employees (%d)\n", cur_size);
+    print_emp(emp_list, cur_size);
 }
 
 /**
@@ -172,21 +183,20 @@ void find_emp_by_ID(){
             printf("Please enter a 6 digit employee id only!");  
             clear_input_buffer();
         }
-        else{
-            for(int i=0; i < cur_size; i++){
-                if(emp_list[i].six_digit_ID == emp_info.six_digit_ID){
-                        printf("%20s %20s %-10s %-10s\n", "\t NAME", ""," SALARY", "\t ID"); 
-                        printf("---------------------------------------------------------------\n");
-                        printf("%-20s %-20s %10d %10d\n", 
-                        emp_list[i].first_name, emp_list[i].last_name, emp_list[i].salary, emp_list[i].six_digit_ID); 
-                        printf("---------------------------------------------------------------\n");
-                        return;
-                }
-            }
-            printf("Employee with id %d not found in DB\n", emp_info.six_digit_ID);
-            return;
+        else break;
+    }
+
+    int num = 0;
+    Employee emps[MAX_EMP];
+    for(int i=0; i < cur_size; i++){
+        if(emp_list[i].six_digit_ID == emp_info.six_digit_ID){
+            emps[num] = emp_list[i];
+            num++;
+            break; // We only find one employee for this!
         }
     }
+    
+    (num) ? print_emp(emps, num) : printf("Employee with id %d not found in DB\n", emp_info.six_digit_ID);
 }
 
 /**
@@ -201,29 +211,22 @@ void find_emp_by_LN(int search_all){
     Employee emp_info;
     printf("Enter Employee's last name (no extra spaces): ");  
     read_string(emp_info.last_name);
-    int flag = 0;
     clear_input_buffer(); // Remove any exceeding characters
+
+    int num = 0;
+    Employee emps[MAX_EMP];
     for(int i=0; i < cur_size; i++){
         if(equal_to(emp_list[i].last_name, emp_info.last_name)){
-            if(!flag){
-                printf("%20s %20s %-10s %-10s\n", "\t NAME", ""," SALARY", "\t ID"); 
-                printf("---------------------------------------------------------------\n");
-                flag = 1; // Confirm existed
-            }
-            printf("%-20s %-20s %10d %10d\n", 
-            emp_list[i].first_name, emp_list[i].last_name, emp_list[i].salary, emp_list[i].six_digit_ID); 
-            if(!search_all){
-                printf("---------------------------------------------------------------\n");
-                return;
-            }
+            emps[num] = emp_list[i];
+            num++;
+            if(!search_all) break;  // We only find one employee for this!
         }
     }
-    (flag) ? printf("---------------------------------------------------------------\n") 
-    : printf("Employee with last name %s not found in DB\n", emp_info.last_name);
+    (num) ? print_emp(emps, num) : printf("Employee with last name %s not found in DB\n", emp_info.last_name);
 }
 
 /**
- * function add_emp()
+ * function save_emp()
  * This function adds the new employee to the list by user input.
  * @param int update - Whether the saving employee is for the update
  * @param Employee emp - The employee to be updated (Empty for adding the new employee)
@@ -394,15 +397,8 @@ void print_top_m_sal(){
     }
     
     quick_sort(top_salary, 0, m - 1);
+    print_emp(top_salary, m);
 
-    printf("%20s %20s %-10s %-10s\n", "\t NAME", ""," SALARY", "\t ID"); 
-    printf("---------------------------------------------------------------\n");
-    for(int i=0; i < m; i++){
-        printf("%-20s %-20s %10d %10d\n", 
-        top_salary[i].first_name, top_salary[i].last_name, top_salary[i].salary, top_salary[i].six_digit_ID); 
-    }
-    printf("---------------------------------------------------------------\n");
-    printf("Number of Employees (%d)\n", m);
 }
 
 /**

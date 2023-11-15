@@ -1,5 +1,5 @@
 # CS402-SP-L2
-SP Lab 02 product(To be updated)
+SP Lab 02 product
 # Description
 1.  SP Lab 02 homework project.
 2.  Read employee data from the text file and read, search, and add the data to the list.
