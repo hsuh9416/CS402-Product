@@ -1,2 +1,2 @@
 # CS402-Product
-Homework upload ant so on.
+Homework upload and so on.
