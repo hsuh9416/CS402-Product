@@ -1,10 +1,10 @@
-// This file contains job list-related manipulation functions.
+// This file contains employee-related manipulation functions.
 #include "workerlib.h"
 
-int cur_id = 0; // maximum id number from current Employee list.
-int cur_size = 0; // maximum size of current Employee list.
+int cur_id = 0; // A maximum id number from current Employee array.
+int cur_size = 0; // A maximum size of current Employee array.
 
-static Employee emp_list[MAX_EMP]; // Employee list instance.
+static Employee emp_list[MAX_EMP]; // Employee array instance.
 
 /**
  * function equal_to()
@@ -61,9 +61,9 @@ void min_heapify(Employee emps[], int size, int i) {
 
 /**
  * function build_min_heap()
- * This function build the heap structure by given array with its size.
+ * This function builds the heap structure by the given array with its size.
  * @param Employee emps - The employ type array to be used to build the heap.
- * @param int size - the size of the array.
+ * @param int size - The size of the array.
  * @return None.
  */
 void build_min_heap(Employee emps[], int size) {
@@ -73,11 +73,11 @@ void build_min_heap(Employee emps[], int size) {
 
 /**
  * function partition()
- * Partition the given Employee list and returns the new partioning index.
- * @param Employee emps - The employ type array to be divided(partioned)
- * @param int l - the leftmost index.
+ * This function divides the given Employee array and returns the new partioning index.
+ * @param Employee emps - The employ type array to be divided(partioned).
+ * @param int l - The leftmost index.
  * @param int r - The rightmost index.
- * @return Partitioning index.
+ * @return The partitioning index.
  */
 int partition(Employee emps[], int l, int r) {
     int pivot = emps[r].six_digit_ID;  
@@ -89,6 +89,7 @@ int partition(Employee emps[], int l, int r) {
             swap(&emps[i], &emps[j]);
         }
     }
+
     swap(&emps[i + 1], &emps[r]);
 
     return (i + 1);
@@ -96,7 +97,7 @@ int partition(Employee emps[], int l, int r) {
 
 /**
  * function quick_sort()
- * The function sorting the given list by quicksort with six_digit_ID as a key.
+ * The function sorts the given array by quicksort with six_digit_ID as a key.
  * @param Employee emps - The employ type array to be sorted
  * @param int l - the leftmost index.
  * @param int r - The rightmost index.
@@ -112,9 +113,9 @@ void quick_sort(Employee emps[], int l, int r) {
 }
 
 /**
- * function load_db()
- * This function load data from file to the Employee list =(array of Struct Employee).
- * @param char *fn - the String value(or pointer of char/ array of char) that represents the file name to read.
+ * function load_DB()
+ * This function load data from file to the Employee array = (array of Struct Employee).
+ * @param char *fn - The String value(or pointer of char/ array of char) that represents the file name to read.
  * @return returns 1 when successful 0 when failed.
  */
 int load_DB(char *fn){
@@ -122,6 +123,7 @@ int load_DB(char *fn){
         printf("Error opening file: %s\n", fn);
         return 0;
     }
+
     Employee emp;
     int ret;
     FILE *fp = get_file();
@@ -134,14 +136,15 @@ int load_DB(char *fn){
     quick_sort(emp_list, 0, cur_size - 1);// Order by ID ascendant
 
     cur_id = emp_list[cur_size-1].six_digit_ID; // Set maximum current id.
-    close_file(); // Close the file have finished reading.
+
+    close_file(); // Close the file finished its reading.
 
     return 1;
 }
 
 /**
  * function print_emp()
- * This function is shared function to print the given list of employees.
+ * This function is shared function to print the given array of employees.
  * @param Employee emps - The array of struct type Employee.
  * @param int size - The size of the given array.
  * @return NONE
@@ -159,7 +162,7 @@ void print_emp(Employee emps[], int size){
 
 /**
  * function print_DB()
- * This function prints the current employee present in the list.
+ * This function prints the current employee present in the array.
  * @param NONE
  * @return NONE
  */
@@ -169,7 +172,7 @@ void print_DB(){
 
 /**
  * function find_emp_by_ID()
- * This function search the target employee by their id.
+ * This function searches the target employee by the user given id.
  * @param NONE
  * @return NONE
  */
@@ -192,7 +195,7 @@ void find_emp_by_ID(){
         if(emp_list[i].six_digit_ID == emp_info.six_digit_ID){
             emps[num] = emp_list[i];
             num++;
-            break; // We only find one employee for this!
+            break; // We only find just one employee for this!
         }
     }
     
@@ -201,7 +204,7 @@ void find_emp_by_ID(){
 
 /**
  * function find_emp_by_LN()
- * This function search the target employee by their last name.
+ * This function searches the target employee by their last name.
  * @param search_all Integer number corresponding the boolean(0, 1) to:
  *          True(1): Search all employees that have the same last name
  *          False(0): Search only the first employee whose last name has been matched. 
@@ -219,7 +222,7 @@ void find_emp_by_LN(int search_all){
         if(equal_to(emp_list[i].last_name, emp_info.last_name)){
             emps[num] = emp_list[i];
             num++;
-            if(!search_all) break;  // We only find one employee for this!
+            if(!search_all) break;  // We only find just one employee for this!
         }
     }
     (num) ? print_emp(emps, num) : printf("Employee with last name %s not found in DB\n", emp_info.last_name);
@@ -227,7 +230,7 @@ void find_emp_by_LN(int search_all){
 
 /**
  * function save_emp()
- * This function adds the new employee to the list by user input.
+ * This function adds the new employee to the array by user input.
  * @param int update - Whether the saving employee is for the update
  * @param Employee emp - The employee to be updated (Empty for adding the new employee)
  * @param int index - The index of the employee to be updated (-1 for adding the new employee)
@@ -296,7 +299,7 @@ void save_emp(int update, int index){
 
 /**
  * function remove_emp()
- * This function removes the existing employee from the list by user input
+ * This function removes the existing employee from the array by user input
  * @param NONE
  * @return NONE
  */
@@ -341,7 +344,7 @@ void remove_emp(){
 
 /**
  * function update_emp()
- * This function updates the existing employee from the list by user input.
+ * This function updates the existing employee from the array by user input.
  * @param NONE
  * @return NONE
  */
@@ -403,7 +406,7 @@ void print_top_m_sal(){
 
 /**
  * function save_db()
- * This function saves the current list to a file according to the user's selection.
+ * This function saves the current array to a file according to the user's selection.
  * @param NONE
  * @return NONE
  */
@@ -424,9 +427,8 @@ void save_db(){
             for(int i = 0; i < cur_size; i++){
                 fprintf(outfile, "%d %s %s %d\n",
                     emp_list[i].six_digit_ID, emp_list[i].first_name, emp_list[i].last_name, emp_list[i].salary);
-                // fwrite((void*)&emp_list[i], sizeof(Employee), 1, outfile);
             }
-            fclose(outfile); // Close the file after writing
+            fclose(outfile); // Close the file after writing.
             printf("Database saved successfully.\n");
             return;
         }

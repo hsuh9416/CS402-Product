@@ -20,7 +20,6 @@ typedef struct {
     int salary;
 } Employee;
 
-Employee get_emp_list();
 int load_DB(char *fn);
 
 void print_DB();

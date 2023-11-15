@@ -16,7 +16,7 @@ int open_file(char *fn){
 
 /**
  * function read_int()
- * This function recieve the user input which is integer type.
+ * This function recieves the user input which is integer type.
  * @param int *x - the pointer of the integer variable that will store the user input value.
  * @return return -1 when failed, 0 when successful.
  */
@@ -27,7 +27,7 @@ int read_int(int *x){
 
 /**
  * function read_float()
- * This function recieve the user input which is float type.
+ * This function recieves the user input which is float type.
  * @param int *f - the pointer of the float variable that will store the user input value.
  * @return return -1 when failed, 0 when successful.
  */
@@ -38,7 +38,7 @@ int read_float(float *f){
 
 /**
  * function read_string()
- * This function recieve the user input which is String(Actually char[]) type.
+ * This function recieves the user input which is String(Actually char[]) type.
  * @param char *s - the pointer of the char variable(Or string type) that will store the user input value.
  * @return return -1 when failed, 0 when successful.
  */
@@ -70,11 +70,10 @@ int close_file(){
 
 /**
  * function get_file()
- * This function is accessor of the FILE pointer.
+ * This function is a accessor of the FILE pointer.
  * @param NONE
  * @return static pointer FILE fp. 
  */
 FILE *get_file(){
     return fp;
 }
-
