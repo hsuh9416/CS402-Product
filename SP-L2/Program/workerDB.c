@@ -38,7 +38,7 @@ int menu(){
             find_emp_by_LN(0); // Search by last name
             break;
         case 4:
-            add_emp(); // Add new employee
+            save_emp(0, -1); // Add new employee
             break;
         case 5:
             save_db(); // Save the list to file
@@ -49,7 +49,7 @@ int menu(){
             remove_emp(); // Remove the existing employee
             break;  
         case 7:
-            update_emp(); // Remove the existing employee
+            update_emp(1); // Update the existing employee
             break;  
         case 8:
             print_top_m_sal(); // Print the M employees with the highest salaries

@@ -6,6 +6,7 @@
 471163 Robert Dufour 91000	 
 493570 Leslie Lamport 63000
 499959 Mike Griffin 72000
+595959 You Deleted 88888
 518364 Vint Cerf 85000
 547935 Daniel McNamee 71000
 553997 Peter Olsen 82000
