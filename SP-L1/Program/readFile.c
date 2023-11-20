@@ -59,9 +59,9 @@ void clear_input_buffer() {
 }
 
 /**
- * function read_int()
+ * function close_file()
  * This function closes the FILE pointer which has opened.
- * @param int NONE
+ * @param NONE
  * @return return 0 when success, return EOF when failed.
  */
 int close_file(){

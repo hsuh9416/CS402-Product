@@ -1,4 +1,4 @@
-# CS402-SP-L2
+# CS402-SP-L3
 SP Lab 03 product
 # Description
 1.  SP Lab 03 homework project.
