@@ -81,8 +81,8 @@ float* load_data(char *fn, int* size, int* malloc_size){
     return arr;
 }
 
-float get_sum(float *arr, float avg, SUMTYPE type, int size){
-    float sum = 0.0;
+double get_sum(float *arr, float avg, SUMTYPE type, int size){
+    double sum = 0.0;
     for(int i=0; i< size; i++){
         float el = (type == HARMONIC) ? 1/arr[i] : (arr[i] - avg);
         sum += (type == SQAURE) ? el*el : el;
@@ -91,7 +91,7 @@ float get_sum(float *arr, float avg, SUMTYPE type, int size){
 }
 
 double get_average(float *arr, int size){
-    return (double)get_sum(arr, 0, NORMAL, size)/size;
+    return get_sum(arr, 0, NORMAL, size)/size;
 }
 
 float get_mode(float *arr, int size){
@@ -117,7 +117,16 @@ float get_mode(float *arr, int size){
     return mode;
 }
 
-float get_harmonic(float *arr, int size){
+double get_geometric(float *arr, int size){
+    double mul = 1;
+    for(int i=0; i < size; i++) {
+        if (arr[i] <= 0) return 0; // This cannot be calculated
+        mul *= arr[i];
+    }
+    return pow(mul, (double)1/size);
+}
+
+double get_harmonic(float *arr, int size){
     return size/get_sum(arr, 0, HARMONIC, size);
 }
 
@@ -132,7 +141,7 @@ float get_median(float *arr, int size){
 };
 
 double get_stddev(float *arr, int size){
-    return (double)sqrt(get_sum(arr, get_average(arr, size), SQAURE, size)/size);
+    return sqrt(get_sum(arr, get_average(arr, size), SQAURE, size)/size);
 };
 
 int get_residual(int size){
