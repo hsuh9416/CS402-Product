@@ -10,7 +10,8 @@
         "header1.h": "c",
         "readfile.h": "c",
         "workerlib.h": "c",
-        "statlib.h": "c"
+        "statlib.h": "c",
+        "statslib.h": "c"
     },
     "cmake.configureOnOpen": false,
     "C_Cpp.errorSquiggles": "disabled"
