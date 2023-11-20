@@ -9,7 +9,9 @@
         "header2.h": "c",
         "header1.h": "c",
         "readfile.h": "c",
-        "workerlib.h": "c"
+        "workerlib.h": "c",
+        "statlib.h": "c"
     },
-    "cmake.configureOnOpen": false
+    "cmake.configureOnOpen": false,
+    "C_Cpp.errorSquiggles": "disabled"
 }
