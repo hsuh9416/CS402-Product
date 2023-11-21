@@ -264,7 +264,7 @@ void save_emp(int update, int index){
     clear_input_buffer();
 
     while(1){
-        if(update) printf("Current salary: %d\n", &emp.salary);
+        if(update) printf("Current salary: %d\n", emp.salary);
         printf("Enter employee's salary (%d to %d): ", MIN_SALARY, MAX_SALARY);  
         flag = read_int(&emp.salary);
         if(flag || emp.salary < MIN_SALARY || emp.salary > MAX_SALARY){

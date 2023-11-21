@@ -1,6 +1,6 @@
 // This file contains main function and run function menu()
 #include <stdio.h>
-#include "readfile.h"
+#include "readFile.h"
 #include "workerlib.h"
 
 /**
@@ -58,7 +58,7 @@ int menu(){
             find_emp_by_LN(1); // Search by last name(multiple)
             break; 
         default:
-            printf("Hey, %d is not between 1 and 9, try again...\n", &sel); // Recieved invalid input
+            printf("Hey, %d is not between 1 and 9, try again...\n", sel); // Recieved invalid input
             break;
     }
     return quit;
