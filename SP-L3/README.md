@@ -21,6 +21,6 @@ basicstats large.txt
 - Execution has been valid in Window environment, but not work as the same in Linux. So some modifictaion added like as follow:
 ```
 gcc *.c -o basicstats -lm
-basicstats small.txt
-basicstats large.txt
+./basicstats small.txt
+./basicstats large.txt
 ```
