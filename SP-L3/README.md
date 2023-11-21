@@ -13,7 +13,14 @@ SP Lab 03 product
 # How to work
 - Enter code below from the 'SP-L3/Program' directory that stores all relevant data.
 ```
-gcc *.c -o basicstats
+gcc *.c -o basicstats -lm
+basicstats small.txt
+basicstats large.txt
+```
+# Update for Linux execution(11.20.2023)
+- Execution has been valid in Window environment, but not work as the same in Linux. So some modifictaion added like as follow:
+```
+gcc *.c -o basicstats -lm
 basicstats small.txt
 basicstats large.txt
 ```
