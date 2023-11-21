@@ -1,6 +1,6 @@
 // This file contains main function and run function menu()
 #include <stdio.h>
-#include "readfile.h"
+#include "readFile.h"
 #include "workerlib.h"
 
 /**
@@ -42,7 +42,7 @@ int menu(){
             quit = 1; // Flag on
             break;         
         default:
-            printf("Hey, %d is not between 1 and 5, try again...\n", &sel); // Recieved invalid input
+            printf("Hey, %d is not between 1 and 5, try again...\n", sel); // Recieved invalid input
             break;
     }
     return quit;

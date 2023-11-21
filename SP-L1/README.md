@@ -16,3 +16,13 @@ SP Lab 01 product
 gcc readFile.c workerlib.c workerDB.c -o workerDB
 workerDB DataBase.txt
 ```
+# Case sensitive Correction for linux (Updated 11.20.2023)
+- Since the code developed and test in 'Window', The following changes had to be made:
+ 1. Make library case sensitive. 'readfile.h'(x) -> 'readFile.h'(o)
+ 2. printf should correspond strictly e.g., printf("%d", &sel) works in window, but not in linux.
+ 3. When running Linux, the location of the executable file must be clearly located. 
+```
+gcc readFile.c workerlib.c workerDB.c -o workerDB
+./workerDB DataBase.txt
+```
+* However, ./workerDB will not be executed in Window CMD. 
