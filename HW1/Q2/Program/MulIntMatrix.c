@@ -2,14 +2,25 @@
 #include <stdlib.h>
 #include <time.h>
 
-//  size range -> range(400, 600)
+//  size range -> range(800, 900)
 int lower = 800;
 int upper = 900;
 
+/**
+ * function getRan: get Random number range from given lower number to upper number
+ * @param
+ * @return (int) Generated integer number
+ */
 int getRan(){
     return rand() % (upper-lower + 1) + lower;
 }
 
+/**
+ * function genMatrix: Generate a matrix by given row and column
+ * @param _r - (int) the intended total number of row
+ * @param _c - (int) the intended total number of column
+ * @return (int**) Generated matrix
+ */
 int **genMatrix(int _r, int _c){
     // Create
     int **matrix;
@@ -25,6 +36,15 @@ int **genMatrix(int _r, int _c){
     return matrix;
 }
 
+/**
+ * function mulMatrix: Multiply the given matrices and return the result
+ * @param mtx1 - (int**) the first matrix
+ * @param mtx2 - (int**) the second matrix
+ * @param _r - (int) the total row number of the first matrix 
+ * @param _m - (int) the total column(row) number of the first(second) matrix
+ * @param _k - (int) the total column number of the second matrix
+ * @return (int**) Generated matrix
+ */
 int **mulMatrix(int** mtx1, int** mtx2, int _r, int _m, int _k){
     // Create
     int **matrix;
@@ -43,6 +63,14 @@ int **mulMatrix(int** mtx1, int** mtx2, int _r, int _m, int _k){
     return matrix;
 }
 
+/**
+ * (This function is optional)
+ * function showMatrix: Show the generated matrix
+ * @param int** mtx - generated matrix(2D array)
+ * @param int row - the total number of row
+ * @param int col - the total number of column
+ * @return None
+ */
 void showMatrix(int** mtx, int row, int col){
     for (int i=0;i<row;i++){
         for (int j=0; j<col;j++) printf("%d ", mtx[i][j]);
@@ -50,6 +78,7 @@ void showMatrix(int** mtx, int row, int col){
     }
 }
 
+// main function
 int main(void)
 {
     srand(time(NULL));
