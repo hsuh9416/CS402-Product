@@ -1,5 +1,5 @@
         .data 0x10000000        # msg1 will be saved to this address.
-msg1:   .asciiz "Please enter a flaot number: "
+msg1:   .asciiz "Please enter a float number: "
 output: .float 0.0
         .text                   # Switches to the text section, where the program's executable code is located.
         .globl main             # Declares the main label as a global symbol, indicating that it's the entry point of the program.
