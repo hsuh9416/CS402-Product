@@ -25,12 +25,12 @@ main:   addu $s0, $ra, $0       # save return address
         lb $t5, 16($t0)         # $t5 <- Store a value of first to $t5 
         lb $t6, 17($t0)         # $t6 <- Store a value of last to $t6 
 # swap values between vars
-        sw $t4, 0($t0)            # Address of var1 <- Save the $t3's value to var1
-        sw $t3, 4($t0)            # Address of var2 <- Save the $t3's value to var1
-        sw $t2, 8($t0)            # Address of var3 <- Save the $t3's value to var1
-        sw $t1, 12($t0)           # Address of var4 <- Save the $t3's value to var1
+        sw $t4, 0($t0)            # Address of var1 <- Save the $t4's value to var1
+        sw $t3, 4($t0)            # Address of var2 <- Save the $t3's value to var2
+        sw $t2, 8($t0)            # Address of var3 <- Save the $t2's value to var3
+        sw $t1, 12($t0)           # Address of var4 <- Save the $t1's value to var4
 # restore the return address in $ra and return from main
-        addu $ra, $0, $s0       # return address back in $31
+        addu $ra, $0, $s0       # load the return address
         jr $ra                  # return from main
         ori $v0, $0, 10         # SET code 10
         syscall                 # Syscall to exit
