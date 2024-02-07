@@ -12,6 +12,6 @@ Loop:   bge $t1, $t2, Exit      # if (i >= 10) goto Exit
         sw $t0, my_array($t4)   # my_array[i] = j
         addi $t1, $t1, 1        # i <- i + 1
         addi $t0, $t0, 1        # j <- j + 1
-        j Loops
+        j Loop
 Exit:   li $v0, 10              # Set code 10(exit)
         syscall                 # Syscall to exit
