@@ -1,10 +1,12 @@
         .data
-msg1:   .asciiz "Please enter the fisrt non-negative integer: "
-msg2:   .asciiz "Please enter the second non-negative integer: "
-msg3:   .asciiz "Result = "
-msg4:   .asciiz "Total number of recursive calls = "
-ln:     .asciiz "\n" 
-err1:   .asciiz "You entered the negative number, please try again. \n"
+msgD:   .asciiz "Please enter the two non-negative integers!\n"
+msg1:   .asciiz "[Enter]The first non-negative integer: "
+msg2:   .asciiz "[Enter]The second non-negative integer: "
+mgsE:   .asciiz "You have entered a negative integer! Please try again.\n"
+msgR:   .asciiz "Result of Ackermann operation = "
+ln:     .asciiz "\n"    # Line break
+        .globl cnt            
+cnt:    .word 0         # Counter for recursive calls
         .text
         .globl main
 main:   
@@ -13,99 +15,105 @@ main:
         sw $ra, 4($sp)    
 
         # Set recursive call counter
-        li $t4, -1            # $t4 <- -1 (Exclude the primary call)
+        lw $t4, cnt            # init counter
 
-        # Read the first number
+        # Promt the direction message
+        li $v0, 4              
+        la $a0, msgD            
+        syscall                
+
+        # Promt the direction message for first integer
         li $v0, 4              
         la $a0, msg1            
-        syscall             
+        syscall      
+
+        # Read the first integer       
         li $v0, 5               
         syscall                 
         
-        bltz $v0, Error         # if ($v0 < 0) goto Error  
-        addu $t0, $v0, $0       # t0 = first_number
+        # Check the negativity
+        bltz $v0, err         # if ($v0 < 0) goto err  
+        addu $t0, $v0, $0     # else load $v0 to $t0
 
-        # Read the second number
+        # Promt the direction message for Second integer
         li $v0, 4              
-        la $a0, msg2           
-        syscall             
+        la $a0, msg2            
+        syscall     
+
+        # Read the second integer           
         li $v0, 5              
         syscall  
 
-        bltz $v0, Error         # if ($v0 < 0) goto Error
-        addu $t1, $v0, $0       # t1 = second_number
+        # Check the negativity
+        bltz $v0, err         # if ($v0 < 0) goto Error
+        addu $t1, $v0, $0     # else load $v0 to $t1
         
         # Start Ackermann
         jal Ackermann
         nop
 
-        # Print output          
+        # Promt the message for result       
         li $v0, 4              
-        la $a0, msg3            
+        la $a0, msgR            
         syscall
+
+        # Promt the Ackermann operation result 
         li $v0, 1              
         move $a0, $t3                     
         syscall
+
+        # Promt the line break   
         li $v0, 4              
         la $a0, ln            
         syscall
        
-        # Print the number of recursive calls
-        li $v0, 4              
-        la $a0, msg4            
-        syscall
-        li $v0, 1              
-        move $a0, $t4                     
-        syscall
-        li $v0, 4              
-        la $a0, ln            
-        syscall
-
         # Restore address and stack point then exit
         lw $ra, 4($sp)
         add $sp, $sp, 4
         jr $ra                  # Return from main
-Error:                          # Warning & Loop again
+err:                            # Warning & Loop again
+        # Promt the error message
         li $v0, 4              
-        la $a0, err1            
+        la $a0, msgD            
         syscall
 
         jal main                # Loop again
 Ackermann:                      # Breakpoint 0x004000cc  
         # Initialize and save the address
-        add $sp, $sp, -12
-        sw $ra, 12($sp)         # Return Address    
-        sw $s0, 8($sp)          # Temp var 1
-        sw $s1, 4($sp)          # Temp var 2
+        add $sp, $sp, -12       # Reserve the space for stack
+        sw $ra, 12($sp)         # Store the return address at (12-8)    
+        sw $s0, 8($sp)          # Store the temporal first integer at (8-4)
+        sw $s1, 4($sp)          # Store the temporal second integer at (4-0)
 
-        addu $t4, $t4, 1        # Count the number of recursive calls
+        addi $t4, $t4, 1        # Increase the counter: cnt <- cnt + 1
 
-        # (X != 0) ? Goto Branch1 : Return Y + 1
-        bne $t0, $0, Branch1    # if( $t0 != 0) goto Branch1
-        add $t3, $t1, 1         # else $t3 <- $t1 + 1
+        # Condition check for if x = 0 then y+1
+        bne $t0, $0, br1        # if( $t0 != 0) goto br1
+        add $t3, $t1, 1         # if( $t0 == 0) $t3 <- $t1 + 1 (result <- y + 1)
 
         j Complete              # Goto Complete               
-Branch1:                        # For X != 0
-        # (Y != 0) ? Goto Branch2 : Return Ackermann(X-1, 1) 
-        bne $t1, $0, Branch2    # if( $t1 != 0) goto Branch2
-        sub $t0, $t0, 1         # $t0 <- $t0 - 1 
-        add $t1, $0, 1          # $t1 <- 0 + 1   
-        jal Ackermann           # Ackermann($t0, $t1) = A($t0 - 1, 1)
+br1:                            # For x != 0
+        # Condition check for else if y = 0 then A(x-1, 1)
+        bne $t1, $0, Branch2    # if( $t1 != 0) goto br2
+        sub $t0, $t0, 1         # $t0 <- $t0 - 1 (x <- x-1)
+        add $t1, $0, 1          # $t1 <- 0 + 1   (y <- 1)
+        jal Ackermann           # Ackermann($t0, $t1) = A($t0 - 1, 1) (result <- A(x-1, 1))
 
         j Complete
-Branch2:                        # For Y != 0, Ackermann(X-1, Ackermann(X, Y-1)) 
-        sub $t1, $t1, 1         # $t1 <- $s1 - 1
-        move $s0, $t0           # $s0 <- $t0 (copy X)
-        jal Ackermann           # Ackermann($t0, $t1) = A($t0, $t1 - 1)
+br2:                            # For y != 0
+        # Condition check for else A(x-1, A(x, y-1))
+        sub $t1, $t1, 1         # $t1 <- $s1 - 1 (y <- y-1)
+        move $s0, $t0           # $s0 <- $t0 (copy x to preserve the value)
+        jal Ackermann           # Ackermann($t0, $t1) = A(x, y-1) (result <- A(x, y - 1))
 
-        sub $t0, $s0, 1         # $t0 <- $s1 - 1 (Set X -1)
-        move $t1, $t3           # $t1 <- A($t0, $t1 - 1)
-        jal Ackermann           # Ackermann($t0, $t1) = A($t0 - 1, A($t0, $t1 - 1))
+        sub $t0, $s0, 1         # $t0 <- $s1 - 1 (x <- x -1) (use preserved x in $s0)
+        move $t1, $t3           # $t1 <- A($t0, $t1 - 1) (y <- result = A(x, y - 1))
+        jal Ackermann           # Ackermann($t0, $t1) = A($t0 - 1, A($t0, $t1 - 1)) (result <- A(x-1, A(x, y-1)))
 
 Complete:
         # Restore address, variables and stack point then return
-        lw $ra, 12($sp)         # Return Address    
-        lw $s0, 8($sp)          # Temp var 1
-        lw $s1, 4($sp)          # Temp var 2
-        add $sp, $sp, 12         # Restore the stack point
-        jal $ra                 # return
+        lw $ra, 12($sp)         # Retrieve the return address    
+        lw $s0, 8($sp)          # Retrieve the temporal first integer
+        lw $s1, 4($sp)          # Retrieve the temporal second integer
+        add $sp, $sp, 12        # Restore the stack point (Resource release)
+        jal $ra                 # return by the saved address
