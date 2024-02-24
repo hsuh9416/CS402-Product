@@ -94,7 +94,7 @@ Ackermann:                      # Breakpoint 0x004000cc
         j Complete              # Goto Complete               
 br1:                            # For x != 0
         # Condition check for else if y = 0 then A(x-1, 1)
-        bne $t1, $0, Branch2    # if( $t1 != 0) goto br2
+        bne $t1, $0, br2        # if( $t1 != 0) goto br2
         sub $t0, $t0, 1         # $t0 <- $t0 - 1 (x <- x-1)
         add $t1, $0, 1          # $t1 <- 0 + 1   (y <- 1)
         jal Ackermann           # Ackermann($t0, $t1) = A($t0 - 1, 1) (result <- A(x-1, 1))
