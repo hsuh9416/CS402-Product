@@ -1,6 +1,6 @@
         .data
-msg1:   .asciiz "Please enter the fisrt integer number: "
-msg2:   .asciiz "Please enter the second integer number: "
+msg1:   .asciiz "Please enter the fisrt non-negative integer: "
+msg2:   .asciiz "Please enter the second non-negative integer: "
 msg3:   .asciiz "Result = "
 msg4:   .asciiz "Total number of recursive calls = "
 ln:     .asciiz "\n" 
