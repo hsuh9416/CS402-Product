@@ -10,12 +10,9 @@ cnt:    .word 0         # Counter for recursive calls
         .text
         .globl main
 main:   
-        # Save return address
-        add $sp, $sp, -4      # Reserve the space for stack (current: -4)
-        sw $ra, 4($sp)        # Store the return address at -(4~0)
-
         # Set recursive call counter
         lw $t4, cnt            # init counter
+        andi $t4, $t4, 0       # init as 0 - For multiple 'run'
 
         # Promt the direction message
         li $v0, 4              
@@ -70,10 +67,9 @@ main:
         # Save the call counter
         sw $t4, cnt            # cnt <- $t4
 
-        # Restore address and stack point then exit
-        lw $ra, 4($sp)          # Retrieve the return address    
-        add $sp, $sp, 4         # Restore the stack point (Resource release) (current: 0)
-        jr $ra                  # Return from main
+        # exit
+        li $v0, 10 
+        syscall
 Error:                          # Warning & Loop again
         # Promt the error message
         li $v0, 4              
@@ -83,10 +79,10 @@ Error:                          # Warning & Loop again
         jal main                # Restart loop
 Ackermann:                      
         # Initialize and save the address
-        add $sp, $sp, -12       # Reserve the space for stack (current: -16)
-        sw $ra, 12($sp)         # Store the return address at -(8-4)    
-        sw $s0, 8($sp)          # Store the temporal first integer at -(12-8)   
-        sw $s1, 4($sp)          # Store the temporal second integer at -(16-12)
+        add $sp, $sp, -12       # Reserve the space for stack (current: -12)
+        sw $ra, 12($sp)         # Store the return address at -(4~0)    
+        sw $s0, 8($sp)          # Store the temporal first integer at -(8~4)   
+        sw $s1, 4($sp)          # Store the temporal second integer at -(12~8)
 
         addi $t4, $t4, 1        # Increase the counter: cnt <- cnt + 1
 
@@ -117,5 +113,5 @@ Complete:
         lw $ra, 12($sp)         # Retrieve the return address    
         lw $s0, 8($sp)          # Retrieve the temporal first integer
         lw $s1, 4($sp)          # Retrieve the temporal second integer
-        add $sp, $sp, 12        # Restore the stack point (Resource release) (current: -4)
+        add $sp, $sp, 12        # Restore the stack point (Resource release) (current: 0)
         jr $ra                 # return by the saved address
