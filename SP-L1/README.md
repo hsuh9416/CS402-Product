@@ -11,10 +11,10 @@ SP Lab 01 product
 - workerdb.exe: Executable file. Needs 'database file path' as a argument.
 - All the external function have been linked by their headers.
 # How to work
-- Enter code below from the 'Program' directory that stores all relevant data.
+- [MacOS] Enter code below from the 'Program' directory that stores all relevant data.
 ```
 gcc readfile.c workerlib.c workerDB.c -o workerDB
-workerDB DataBase.txt
+./workerDB DataBase.txt
 ```
 # Updates (Last update: 03.20.2024)
 (03.20.2024) Code updates from previous lab - Fall 2023
