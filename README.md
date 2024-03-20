@@ -1,2 +1,2 @@
 # CS402-Product
-Homework upload and so on.
+- SPRING 2024 CS402 Assignments
