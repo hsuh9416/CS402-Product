@@ -13,16 +13,12 @@ SP Lab 01 product
 # How to work
 - Enter code below from the 'Program' directory that stores all relevant data.
 ```
-gcc readFile.c workerlib.c workerDB.c -o workerDB
+gcc readfile.c workerlib.c workerDB.c -o workerDB
 workerDB DataBase.txt
 ```
-# Case sensitive Correction for linux (Updated 11.20.2023)
-- Since the code developed and test in 'Window', The following changes had to be made:
- 1. Make library case sensitive. 'readfile.h'(x) -> 'readFile.h'(o)
- 2. printf should correspond strictly e.g., printf("%d", &sel) works in window, but not in linux.
- 3. When running Linux, the location of the executable file must be clearly located. 
-```
-gcc readFile.c workerlib.c workerDB.c -o workerDB
-./workerDB DataBase.txt
-```
-* However, ./workerDB will not be executed in Window CMD. 
+# Updates (Last update: 03.20.2024)
+(03.20.2024) Code updates from previous lab - Fall 2023
+- Changed some signatures to correspond the requirements.
+- Removed some functions that related with the requirements.
+- Simplified and cleaned up some functions.
+- Added missing docstrings.

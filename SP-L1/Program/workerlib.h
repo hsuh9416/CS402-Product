@@ -3,7 +3,7 @@
 #define WORKERLIB_H
 
 #include <stdio.h>
-#include "readFile.h"
+#include "readfile.h"
 
 #define MAX_NAME 64 // Maximum length of character for the name values.
 #define MAX_EMP  1024 // Maximum size of Employee list.
@@ -20,14 +20,11 @@ typedef struct {
     int salary;
 } Employee;
 
-Employee get_emp_list();
 int load_db(char *fn);
 
 void print_DB();
 void find_emp_by_ID();
 void find_emp_by_LN();
-void Add_emp();
-
-void save_db();
+void add_emp();
 
 #endif

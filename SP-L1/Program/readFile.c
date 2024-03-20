@@ -1,50 +1,47 @@
 // This file contains functions related to reading files/reading user input.
-#include "readFile.h"
+#include "readfile.h"
 
-static FILE *fp; // File stream pointer used for reading data from text file. 
+FILE *fp; // File stream pointer used for reading data from text file. 
 
 /**
  * function open_file()
  * This function opens the file by given string value(file path). 
  * @param char *fn - String value that represents the file path/location.
- * @return return -1 when failed, 0 when successful.
+ * @return return 0 when failed, 1 when successful.
  */
 int open_file(char *fn){
     fp = fopen(fn,"rt");
-    return (fp == NULL) ? -1: 0;
+    return fp != NULL; // Return true(1) when successful, otherwise return false(0).
 }
 
 /**
  * function read_int()
  * This function recieve the user input which is integer type.
  * @param int *x - the pointer of the integer variable that will store the user input value.
- * @return return -1 when failed, 0 when successful.
+ * @return return 0 when successful, otherwise return -1.
  */
 int read_int(int *x){
-    int result = scanf("%d", x);
-    return (result == EOF) ? -1 : 0;
+    return (scanf("%d", x) != EOF) ? 0 : -1;
 }
 
 /**
  * function read_float()
  * This function recieve the user input which is float type.
  * @param int *f - the pointer of the float variable that will store the user input value.
- * @return return -1 when failed, 0 when successful.
+ * @return return 0 when successful, otherwise return -1.
  */
 int read_float(float *f){
-    int result = scanf("%f", f);
-    return (result == EOF) ? -1 : 0;
+    return (scanf("%f", f) != EOF) ? 0 : -1;
 }
 
 /**
  * function read_string()
  * This function recieve the user input which is String(Actually char[]) type.
  * @param char *s - the pointer of the char variable(Or string type) that will store the user input value.
- * @return return -1 when failed, 0 when successful.
+ * @return return 0 when successful, otherwise return -1.
  */
 int read_string(char *s){
-    int result = scanf("%64s", s); // limited to 64
-    return (result == EOF) ? -1 : 0;
+    return (scanf("%64s", s) != EOF) ? 0 : -1; // limited to 64
 }
 
 /**

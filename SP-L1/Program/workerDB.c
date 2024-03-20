@@ -1,6 +1,6 @@
 // This file contains main function and run function menu()
 #include <stdio.h>
-#include "readFile.h"
+#include "readfile.h"
 #include "workerlib.h"
 
 /**
@@ -10,7 +10,7 @@
  * @return return 1 when request quit, else return 0
  */
 int menu(){
-    int sel, quit = 0;
+    int sel;
 
     printf("Employee DB Menu:\n");
     printf("----------------------------------\n");
@@ -25,43 +25,39 @@ int menu(){
     switch (sel)
     {
         case 1:
-            print_DB(); // Print the list
+            print_DB(); // Print the list.
             break;
         case 2:
-            find_emp_by_ID(); // Search by id
+            find_emp_by_ID(); // Search by id.
             break;
         case 3:
-            find_emp_by_LN(); // Search by last name
+            find_emp_by_LN(); // Search by last name.
             break;
         case 4:
-            Add_emp(); // Add new employee
+            add_emp(); // Add new employee.
             break;
         case 5:
-            save_db(); // Save the list to file
             printf("goodbye!\n");  
-            quit = 1; // Flag on
-            break;         
+            return 1; // Exit.       
         default:
-            printf("Hey, %d is not between 1 and 5, try again...\n", sel); // Recieved invalid input
+            printf("Hey, %d is not between 1 and 5, try again...\n", sel); // Recieved invalid input.
             break;
     }
-    return quit;
+    printf("\n"); // Line change.
+    return 0;
 }
 
 // Main function
 int main(int argc, char *argv[])
 {
-    if(argc != 2){ // No argument. Terminate
-        printf("Employee database is missing!");
-        return 1;
+    if(argc < 2 || load_db(argv[1]) == 0){ // Invalid argument. 
+        printf("[Error] No database has been found!");
+        return 1;// Terminate.
     }
 
-    if(load_db(argv[1]) == 0) return 1; // load db
-
-    int quit = 0;
-    while(!quit){// Loop until request quit;
-        quit = menu();
+    while(!menu()){
+        // Loop until request quit.
     }
 
-    return 0;
+    return 0;// Terminate.
 }
