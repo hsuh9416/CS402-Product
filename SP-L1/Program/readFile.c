@@ -7,11 +7,11 @@ FILE *fp; // File stream pointer used for reading data from text file.
  * function open_file()
  * This function opens the file by given string value(file path). 
  * @param char *fn - String value that represents the file path/location.
- * @return return 0 when failed, 1 when successful.
+ * @return return 0 when successful, otherwise return -1.
  */
 int open_file(char *fn){
     fp = fopen(fn,"rt");
-    return fp != NULL; // Return true(1) when successful, otherwise return false(0).
+    return (fp != NULL) ? 0: -1;
 }
 
 /**
