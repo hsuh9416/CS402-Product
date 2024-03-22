@@ -10,10 +10,15 @@ SP Lab 01 product
 - workerdb.exe: Executable file. Needs a 'database file path' as an argument.
 - All the external functions have been linked by their headers.
 # How to work
-- [MacOS] Enter the code below from the 'Program' directory that stores all relevant data.
+- [MacOS, UbuntuOS] Enter the code below from the 'Program' directory that stores all relevant data.
 ```
 gcc readFile.c workerlib.c workerDB.c -o workerDB
 ./workerDB DataBase.txt
+```
+- [Window OS] Enter the code below from the 'Program' directory that stores all relevant data.
+```
+gcc readFile.c workerlib.c workerDB.c -o workerDB
+workerDB DataBase.txt
 ```
 # Updates (Last update: 03.22.2024)
 (03.20.2024) Code updates from previous version
@@ -27,3 +32,6 @@ gcc readFile.c workerlib.c workerDB.c -o workerDB
 - Also changed to execution command to correspond to the filename.
 (03.22.2024) Fixed some error
 - load_db set incorrectly -> fixed.
+(03.22.2024) Added input handling
+- 'read_int' will detect invalid input(such as float) then reject as EOF. 
+(03.22.2024) Added window, UbuntuOS version execution method. 
