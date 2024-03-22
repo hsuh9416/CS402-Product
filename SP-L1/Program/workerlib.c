@@ -55,7 +55,7 @@ void sort_employees_by_id(int size) {
  * @return returns 1 when successful 0 when failed.
  */
 int load_db(char *fn){
-    if(open_file(fn) == 0){ // File error
+    if(open_file(fn) != 0){ // File error
         printf("[Error]Unable to open the file: %s\n", fn);
         return 0;
     }

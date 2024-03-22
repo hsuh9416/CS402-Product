@@ -1,5 +1,5 @@
 // This file contains functions related to reading files/reading user input.
-#include "readfile.h"
+#include "readFile.h"
 
 FILE *fp; // File stream pointer used for reading data from text file. 
 

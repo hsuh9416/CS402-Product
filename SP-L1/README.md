@@ -12,12 +12,18 @@ SP Lab 01 product
 # How to work
 - [MacOS] Enter the code below from the 'Program' directory that stores all relevant data.
 ```
-gcc readfile.c workerlib.c workerDB.c -o workerDB
+gcc readFile.c workerlib.c workerDB.c -o workerDB
 ./workerDB DataBase.txt
 ```
-# Updates (Last update: 03.20.2024)
+# Updates (Last update: 03.22.2024)
 (03.20.2024) Code updates from previous version
 - Changed some signatures to correspond to the requirements.
 - Removed some functions that related to the requirements.
 - Simplified and cleaned up some functions.
 - Added missing docstrings.
+(03.22.2024) Corrected file reference
+- Unlike MacOS, UbuntuOS track file name as case sensitive. 
+- Thus, changed file reference to correspond to real name.
+- Also changed to execution command to correspond to the filename.
+(03.22.2024) Fixed some error
+- load_db set incorrectly -> fixed.
