@@ -1,6 +1,6 @@
 // This file contains main function and run function menu()
 #include <stdio.h>
-#include "readFile.h"
+#include "readfile.h"
 #include "workerlib.h"
 
 /**

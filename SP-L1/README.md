@@ -4,7 +4,7 @@ SP Lab 01 product
 1.  SPLab 01 homework project. 
 2.  Read employee data from the text file and read, search, and add the data to the list.
 3.  The file is consisted of as in the following.
-- readFile.h / readFile.c: Contains I/O related functions.
+- readfile.h / readfile.c: Contains I/O related functions.
 - workerlib.h / workerlib.c: Contains functions for the SP-L1 requirements.
 - workerdb.c: Contains the main function and the run function named 'menu()'.
 - workerdb.exe: Executable file. Needs a 'database file path' as an argument.
@@ -12,12 +12,12 @@ SP Lab 01 product
 # How to work
 - [MacOS, UbuntuOS] Enter the code below from the 'Program' directory that stores all relevant data.
 ```
-gcc readFile.c workerlib.c workerDB.c -o workerDB
+gcc readfile.c workerlib.c workerDB.c -o workerDB
 ./workerDB DataBase.txt
 ```
 - [Window OS] Enter the code below from the 'Program' directory that stores all relevant data.
 ```
-gcc readFile.c workerlib.c workerDB.c -o workerDB
+gcc readfile.c workerlib.c workerDB.c -o workerDB
 workerDB DataBase.txt
 ```
 # Updates (Last update: 03.22.2024)
