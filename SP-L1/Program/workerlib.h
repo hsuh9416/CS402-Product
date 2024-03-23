@@ -5,7 +5,7 @@
 #include <stdio.h>
 #include "readfile.h"
 
-#define MAX_NAME 64 // Maximum length of character for the name values.
+#define MAX_NAME 10 // Maximum length of character for the name values.
 #define MAX_EMP  1024 // Maximum size of Employee list.
 #define MIN_SALARY 30000 // Minimum salary for each employee.
 #define MAX_SALARY 150000 // Maximum salary for each employee.

@@ -101,7 +101,7 @@ void find_emp_by_ID(){
     Employee emp_info;
 
     while(1){ // Repeat until get the right input
-        printf("Enter a 6 digit employee id: ");  
+        printf("Enter a 6 digit employee id(Range: MIN = %d, MAX = %d): ", MIN_ID, MAX_ID);  
         if(read_int(&emp_info.six_digit_ID) == EOF || emp_info.six_digit_ID < MIN_ID || emp_info.six_digit_ID > MAX_ID){
             printf("Please enter a 6 digit employee id only!\n");  
             clear_input_buffer();
@@ -131,8 +131,16 @@ void find_emp_by_ID(){
  */
 void find_emp_by_LN(){
     Employee emp_info;
-    printf("Enter Employee's last name (no extra spaces): ");  
-    read_string(emp_info.last_name);
+
+    while(1){
+        clear_input_buffer(); // Init buffer
+            printf("Enter Employee's last name (no extra spaces, maximum %d character): ", MAX_NAME);  
+        if(read_string(emp_info.last_name) == EOF){ // Invalid input
+            printf("[Error] Invalid input for the last name. Try Again!\n");
+        } 
+        else break; // Finish loop when successful.
+    }
+    
     clear_input_buffer(); // Remove any exceeding characters
     for(int i=0; i < cur_size; i++){
         if(equal_to(emp_list[i].last_name, emp_info.last_name)){
@@ -144,7 +152,7 @@ void find_emp_by_LN(){
             return;
         }
     }
-    printf("Employee with last name %s not found in DB\n", emp_info.last_name);
+    printf("Employee with last name %s not found in DB.\n", emp_info.last_name);
 }
 
 /**
@@ -189,7 +197,7 @@ void add_emp(){
 
     printf("do you want to add the following employee to the DB?\n");  
     printf("\t\t%s %s, salary: %d\n", emp_info.first_name, emp_info.last_name, emp_info.salary);  
-    printf("Enter 1 for yes, 0 or else for no:");
+    printf("Enter 1 for yes, 0 or else for no: ");
     scanf("%d", &sel);
     
     if(sel == 1){

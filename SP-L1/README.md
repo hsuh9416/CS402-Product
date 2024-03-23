@@ -21,17 +21,22 @@ gcc readfile.c workerlib.c workerDB.c -o workerDB
 workerDB DataBase.txt
 ```
 # Updates (Last update: 03.22.2024)
-(03.20.2024) Code updates from previous version
+(03.20.2024) Code updates from previous version.
 - Changed some signatures to correspond to the requirements.
 - Removed some functions that related to the requirements.
 - Simplified and cleaned up some functions.
 - Added missing docstrings.
-(03.22.2024) Corrected file reference
+(03.22.2024) Corrected file reference.
 - Unlike MacOS, UbuntuOS track file name as case sensitive. 
 - Thus, changed file reference to correspond to real name.
 - Also changed to execution command to correspond to the filename.
-(03.22.2024) Fixed some error
+(03.22.2024) Fixed some error.
 - load_db set incorrectly -> fixed.
-(03.22.2024) Added input handling
+(03.22.2024) Added input handling.
 - 'read_int' will detect invalid input(such as float) then reject as EOF. 
 (03.22.2024) Added window, UbuntuOS version execution method. 
+(03.23.2024) Change some format.
+- Ternary operators to standard if/else statements.
+(03.23.2024) Added some error handlings.
+- Error handling for maximum input string as 64 char(including '\0').
+- Error handling for the function 'find_emp_by_LN()'.

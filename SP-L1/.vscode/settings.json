@@ -1,6 +1,7 @@
 {
     "files.associations": {
         "workerlib.h": "c",
-        "readfile.h": "c"
+        "readfile.h": "c",
+        "stdio.h": "c"
     }
 }
