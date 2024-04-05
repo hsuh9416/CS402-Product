@@ -82,16 +82,15 @@ void build_min_heap(Employee emps[], int size) {
  *        'I': six_digit_ID
  *        'S': salary
  */
-int partition(Employee emps[], int l, int r, char orderby) {
+int partition(Employee emps[], int l, int r) {
     
-    int pivot == emps[r].six_digit_ID; // default
-    if (orderby == 'S') pivot == emps[r].salary;  
+    int pivot = emps[r].six_digit_ID; // default
+
 
     int i = (l - 1);  // Index of smaller element
 
     for (int j = l; j <= r - 1; j++) {
-        if ( ( (orderby == 'I') && (emps[j].six_digit_ID <= pivot) ) 
-        || ( (orderby == 'S') && (emps[j].salary >= pivot) )) {
+        if (emps[j].six_digit_ID <= pivot) {
             i++;  // increment index of smaller element
             swap(&emps[i], &emps[j]);
         }
@@ -108,15 +107,14 @@ int partition(Employee emps[], int l, int r, char orderby) {
  * @param Employee emps - The employ type array to be sorted
  * @param int l - the leftmost index.
  * @param int r - The rightmost index.
- * @param char orderby - the method to use for sorting
  */
-void quick_sort(Employee emps[], int l, int r, char orderby) {
+void quick_sort(Employee emps[], int l, int r) {
     if (l < r) {
-        int pi = partition(emps, l, r, orderby);
+        int pi = partition(emps, l, r);
 
         // Separately sort elements before partition and after partition
-        quick_sort(emps, l, pi - 1, orderby);
-        quick_sort(emps, pi + 1, r, orderby);
+        quick_sort(emps, l, pi - 1);
+        quick_sort(emps, pi + 1, r);
     }
 }
 

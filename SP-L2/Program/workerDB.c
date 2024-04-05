@@ -67,7 +67,7 @@ int menu(){
 // Main function
 int main(int argc, char *argv[])
 {
-    if(argc < 2 || load_db(argv[1]) == 0){ // Invalid argument. 
+    if(argc < 2 || load_DB(argv[1]) == 0){ // Invalid argument. 
         printf("[Error] No database has been found!");
         return 1;// Terminate.
     }

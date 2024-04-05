@@ -19,13 +19,11 @@ int open_file(char *fn){
  * function read_int()
  * This function recieve the user input which is integer type.
  * @param int *x - the pointer of the integer variable that will store the user input value.
- * @return return 0 when successful, otherwise return -1(invalid input, including float).
+ * @return return 0 when successful, otherwise return -1
  */
 int read_int(int *x){
-    char inputEnd; // Detect invalid input(such as '.' for float)
-    int result = scanf("%d%c", x, &inputEnd);
-    if(result == 2 && (inputEnd == '\n' || inputEnd == ' ')) return 0;
-    else return -1;
+    if (scanf("%d", x) != EOF) return 0; // Result was success.
+    else return -1; // Result was EOF, failure.
 }
 
 /**
