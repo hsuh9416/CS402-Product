@@ -20,7 +20,7 @@ gcc readfile.c workerlib.c workerDB.c -o workerDB
 gcc readfile.c workerlib.c workerDB.c -o workerDB
 workerDB DataBase.txt
 ```
-# Updates (Last update: 03.22.2024)
+# Updates (Last update: 04.05.2024)
 (03.20.2024) Code updates from previous version.
 - Changed some signatures to correspond to the requirements.
 - Removed some functions that related to the requirements.
@@ -40,7 +40,8 @@ workerDB DataBase.txt
 (03.23.2024) Added some error handlings.
 - Error handling for maximum input string as 64 char(including '\0').
 - Error handling for the function 'find_emp_by_LN()'.
+------------------- Submission due --------------------------------------
 (04.05.2024) Fix the error 
-- This is not a part of submission but fix for working properly.(Please refer to the history)
+- This is not a part of submission but fixed in order to gurantee of proper working.(Please refer to <a href="https://github.com/hsuh9416/CS402-Product/commit/f4a2f0f41881e78726cd037d1b50b135efe8d400">the history</a>)
 - Value 10 -> 64.
 - Fix improper conditional statement.
