@@ -3,7 +3,7 @@
 #define WORKERLIB_H
 
 #include <stdio.h>
-#include "readFile.h"
+#include "readfile.h"
 
 #define MAX_NAME 64 // Maximum length of character for the name values.
 #define MAX_EMP  1024 // Maximum size of Employee list.

@@ -1,5 +1,5 @@
 // This file contains functions related to reading files/reading user input.
-#include "readFile.h"
+#include "readfile.h"
 #include "workerlib.h"
 static FILE *fp; // File stream pointer used for reading data from text file. 
 

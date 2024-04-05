@@ -74,15 +74,15 @@ void copy_str(char* src, char* dst, int end){
  * @return return 0 when successful, otherwise return -1.
  */
 int read_string(char *s){
-    char str[MAX_NAME + 2]; // MAX_NAME(64) + 2 * includes '\0'.
+    char str[MAX_NAME + 1]; // MAX_NAME(64) + 1 * includes '\0'.
     char fmt_str[20];
-    snprintf(fmt_str, sizeof(fmt_str), "%%%ds", MAX_NAME + 1);
+    snprintf(fmt_str, sizeof(fmt_str), "%%%ds", MAX_NAME);
     int result = scanf(fmt_str, str); // scanf("%65s", str)
     if (result != EOF){ // Not EOF, but need to check the length
         // check the length
         int str_end = get_str_end(str); // get the end index.
 
-        if (str_end > MAX_NAME) { // The input has exceeded the maximum length!
+        if (str_end >= MAX_NAME) { // The input has exceeded the maximum length!
             printf("[Warning] The maximum number of characters you can enter is %d!\n", MAX_NAME-1);
             return -1;
         }

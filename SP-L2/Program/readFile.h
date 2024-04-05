@@ -1,4 +1,4 @@
-// Header file for "readFile.c"
+// Header file for "readfile.c"
 #ifndef READFILE_H
 #define READFILE_H
 

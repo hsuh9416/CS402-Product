@@ -1,6 +1,6 @@
 // This file contains main function and run function menu()
 #include <stdio.h>
-#include "readFile.h"
+#include "readfile.h"
 #include "workerlib.h"
 
 /**
@@ -10,7 +10,7 @@
  * @return return 1 when request quit, else return 0
  */
 int menu(){
-    int sel, quit = 0;
+    int sel;
 
     printf("Employee DB Menu:\n");
     printf("------------------------------------------------------\n");
@@ -41,7 +41,7 @@ int menu(){
             save_emp(0, -1); // Add new employee
             break;
         case 5:
-            save_DB(); // Save the list to file
+            // save_DB(); // Save the list to file
             printf("goodbye!\n");  
             return 1; // Exit.   
         case 6:

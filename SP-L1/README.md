@@ -40,3 +40,7 @@ workerDB DataBase.txt
 (03.23.2024) Added some error handlings.
 - Error handling for maximum input string as 64 char(including '\0').
 - Error handling for the function 'find_emp_by_LN()'.
+(04.05.2024) Fix the error 
+- This is not a part of submission but fix for working properly.(Please refer to the history)
+- Value 10 -> 64.
+- Fix improper conditional statement.

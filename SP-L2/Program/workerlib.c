@@ -78,13 +78,20 @@ void build_min_heap(Employee emps[], int size) {
  * @param int l - The leftmost index.
  * @param int r - The rightmost index.
  * @return The partitioning index.
+ * @param char orderby - the method to use for sorting. 
+ *        'I': six_digit_ID
+ *        'S': salary
  */
-int partition(Employee emps[], int l, int r) {
-    int pivot = emps[r].six_digit_ID;  
+int partition(Employee emps[], int l, int r, char orderby) {
+    
+    int pivot == emps[r].six_digit_ID; // default
+    if (orderby == 'S') pivot == emps[r].salary;  
+
     int i = (l - 1);  // Index of smaller element
 
     for (int j = l; j <= r - 1; j++) {
-        if (emps[j].six_digit_ID <= pivot) {
+        if ( ( (orderby == 'I') && (emps[j].six_digit_ID <= pivot) ) 
+        || ( (orderby == 'S') && (emps[j].salary >= pivot) )) {
             i++;  // increment index of smaller element
             swap(&emps[i], &emps[j]);
         }
@@ -101,14 +108,15 @@ int partition(Employee emps[], int l, int r) {
  * @param Employee emps - The employ type array to be sorted
  * @param int l - the leftmost index.
  * @param int r - The rightmost index.
+ * @param char orderby - the method to use for sorting
  */
-void quick_sort(Employee emps[], int l, int r) {
+void quick_sort(Employee emps[], int l, int r, char orderby) {
     if (l < r) {
-        int pi = partition(emps, l, r);
+        int pi = partition(emps, l, r, orderby);
 
         // Separately sort elements before partition and after partition
-        quick_sort(emps, l, pi - 1);
-        quick_sort(emps, pi + 1, r);
+        quick_sort(emps, l, pi - 1, orderby);
+        quick_sort(emps, pi + 1, r, orderby);
     }
 }
 
@@ -119,14 +127,15 @@ void quick_sort(Employee emps[], int l, int r) {
  * @return returns 1 when successful 0 when failed.
  */
 int load_DB(char *fn){
-    if(open_file(fn) == -1){ // File error
-        printf("Error opening file: %s\n", fn);
+    if(open_file(fn) != 0){ // File error
+        printf("[Error] Unable to open the file: %s\n", fn);
         return 0;
     }
 
-    Employee emp;
     int ret;
     FILE *fp = get_file();
+    Employee emp;
+
     while(1){ // ID, First Name, Last Name, Salary
         ret = fscanf(fp, "%d %s %s %d",&emp.six_digit_ID, emp.first_name, emp.last_name, &emp.salary);
         if(ret==EOF) break; // No more data
@@ -180,26 +189,26 @@ void find_emp_by_ID(){
     Employee emp_info;
 
     while(1){ // Repeat until get the right input
-        printf("Enter a 6 digit employee id: ");  
-        int flag = read_int(&emp_info.six_digit_ID);
-        if(flag || emp_info.six_digit_ID < MIN_ID || emp_info.six_digit_ID > MAX_ID){
-            printf("Please enter a 6 digit employee id only!");  
+        printf("Enter a 6 digit employee id(Range: MIN = %d, MAX = %d): ", MIN_ID, MAX_ID);  
+        if(read_int(&emp_info.six_digit_ID) == EOF || emp_info.six_digit_ID < MIN_ID || emp_info.six_digit_ID > MAX_ID){
+            printf("Please enter a 6 digit employee id only!\n");  
             clear_input_buffer();
         }
         else break;
     }
 
-    int num = 0;
-    Employee emps[MAX_EMP];
+    int hasExisted = 0;
+    Employee emps[cur_size]; // Won't be larger than the original list!
     for(int i=0; i < cur_size; i++){
         if(emp_list[i].six_digit_ID == emp_info.six_digit_ID){
-            emps[num] = emp_list[i];
-            num++;
-            break; // We only find just one employee for this!
+            emps[0] = emp_list[i];
+            hasExisted = 1;
+            break; // We actually find just one employee for this!
         }
     }
     
-    (num) ? print_emp(emps, num) : printf("Employee with id %d not found in DB\n", emp_info.six_digit_ID);
+    if (hasExisted) print_emp(emps, 1);
+    else printf("Employee with id %d not found in DB\n", emp_info.six_digit_ID);
 }
 
 /**
@@ -225,13 +234,15 @@ void find_emp_by_LN(int search_all){
             if(!search_all) break;  // We only find just one employee for this!
         }
     }
-    (num) ? print_emp(emps, num) : printf("Employee with last name %s not found in DB\n", emp_info.last_name);
+    
+    if (num > 0) print_emp(emps, num);
+    else printf("Employee(s) with last name %s not found in DB\n", emp_info.last_name);
 }
 
 /**
  * function save_emp()
  * This function adds the new employee to the array by user input.
- * @param int update - Whether the saving employee is for the update
+ * @param int update - Whether the saving employee is for the update(1) or insert(0)
  * @param Employee emp - The employee to be updated (Empty for adding the new employee)
  * @param int index - The index of the employee to be updated (-1 for adding the new employee)
  * @return NONE
@@ -241,7 +252,7 @@ void save_emp(int update, int index){
     int flag = 0;
     Employee emp = (update) ? emp_list[index] : emp_list[cur_size+1];
     while(1){
-        if(update) printf("Current first name: %s\n", emp.first_name);
+        if(update) printf("Current first name: %s\n", emp.first_name); // Show existing one
         printf("Enter the first name of the employee: ");  
         flag = read_string(emp.first_name);
         if(!flag) break;
@@ -253,7 +264,7 @@ void save_emp(int update, int index){
     clear_input_buffer();
     
     while(1){
-        if(update) printf("Current last name: %s\n", emp.last_name);
+        if(update) printf("Current last name: %s\n", emp.last_name);  // Show existing one
         printf("Enter the last name of the employee: ");  
         flag = read_string(emp.last_name);
         if(!flag) break;
@@ -308,11 +319,12 @@ void remove_emp(){
     int index;
     int found = 0;
     while(1){
-        printf("Enter the six-digit id of the employee to be removed: ");  
-        int flag = read_int(&emp_info.six_digit_ID);
-        if(!flag && emp_info.six_digit_ID >= MIN_ID && emp_info.six_digit_ID <= MAX_ID) break;
-        printf("Please enter a 6 digit employee id only!");  
-        clear_input_buffer();
+        printf("Enter a 6 digit employee id to be removed(Range: MIN = %d, MAX = %d): ", MIN_ID, MAX_ID);  
+        if(read_int(&emp_info.six_digit_ID) == EOF || emp_info.six_digit_ID < MIN_ID || emp_info.six_digit_ID > MAX_ID){
+            printf("Please enter a 6 digit employee id only!\n");  
+            clear_input_buffer();
+        }
+        else break;
     }
 
     for(int i=0; i < cur_size; i++){
@@ -322,7 +334,7 @@ void remove_emp(){
             int sel;
             printf("do you want to revmove the following employee to the DB?\n");  
             printf("\t\t%s %s, salary: %d\n", emp_list[i].first_name, emp_list[i].last_name, emp_list[i].salary);  
-            printf("Enter 1 for yes, 0 or else for no:");
+            printf("Enter 1 for yes, 0 or else for no: ");
             scanf("%d", &sel);
             if(sel) break; // break to proceed.
             else {
@@ -333,7 +345,7 @@ void remove_emp(){
     }
 
     if(found){// If found then 
-        for(int i=index; i < cur_size; i++){
+        for(int i=index; i < cur_size; i++){ // shift left to replace the removed data
             swap(&emp_list[i], &emp_list[i+1]);
         }
         cur_size--;
@@ -360,7 +372,7 @@ void update_emp(){
         else{
             for(int i=0; i < cur_size; i++){
                 if(emp_list[i].six_digit_ID == emp_info.six_digit_ID){
-                    save_emp(1, i);
+                    save_emp(1, i); // update employee with user input
                     return;
                 }
             }
@@ -382,29 +394,30 @@ void print_top_m_sal(){
         printf("Enter the number of employees with the highest salaries(Current # of Employees: %d): ", cur_size);  
         int flag = read_int(&m);
         if (!flag && m <= cur_size) break;
-        printf("Please enter the number smaller than the number of current employees!!\n");
+        printf("Please enter the valid number smaller than the number of current employees!!\n");
         clear_input_buffer();
     }
 
-    Employee top_salary[MAX_EMP];  
+    Employee top_salary[m];  
     for (int i = 0; i < m; i++) // Copy the values for the m employees only.
         top_salary[i] = emp_list[i];
 
-    build_min_heap(top_salary, m); // Build the heap
+    build_min_heap(top_salary, m); // Build the heap to sort
 
     for (int i = m; i < cur_size; i++) {
         if (emp_list[i].salary > top_salary[0].salary) {
-            top_salary[0] = emp_list[i];
-            min_heapify(top_salary, m, 0);
+            top_salary[0] = emp_list[i]; // replace with the minimum
+            min_heapify(top_salary, m, 0); // re-sort
         }
     }
     
-    quick_sort(top_salary, 0, m - 1);
+    quick_sort(top_salary, 0, m - 1); // sort by id
     print_emp(top_salary, m);
 
 }
 
 /**
+ * [This function is optional]
  * function save_DB()
  * This function saves the current array to a file according to the user's selection.
  * @param NONE
@@ -413,7 +426,7 @@ void print_top_m_sal(){
 void save_DB(){
     int sel;
     printf("do you want to save the database?\n");  
-    printf("Enter 1 for yes, else for no:");
+    printf("Enter 1 for yes, else for no: ");
     scanf("%d", &sel);
  
     if(sel == 1){
