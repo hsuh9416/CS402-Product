@@ -31,4 +31,6 @@ workerDB DataBase.txt
 (04.05.2024) Fix error from SP-L01
 - Value error after testing: 64 -> 10 -> 64
 - Coditional statement. No need to add 2 index!
-- Will also reflect to the SP-L01
+- Also reflected to the SP-L01
+(04.05.2024) Inactivated the saving function
+- Not a part of requirement but leave the function.
