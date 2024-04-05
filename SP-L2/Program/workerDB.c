@@ -41,10 +41,9 @@ int menu(){
             save_emp(0, -1); // Add new employee
             break;
         case 5:
-            save_db(); // Save the list to file
+            save_DB(); // Save the list to file
             printf("goodbye!\n");  
-            quit = 1; // Flag on
-            break;     
+            return 1; // Exit.   
         case 6:
             remove_emp(); // Remove the existing employee
             break;  
@@ -61,23 +60,21 @@ int menu(){
             printf("Hey, %d is not between 1 and 9, try again...\n", sel); // Recieved invalid input
             break;
     }
-    return quit;
+    printf("\n");// Line change.
+    return 0; // Continue
 }
 
 // Main function
 int main(int argc, char *argv[])
 {
-    if(argc != 2){ // No argument. Terminate
-        printf("Employee database is missing!");
-        return 1;
+    if(argc < 2 || load_db(argv[1]) == 0){ // Invalid argument. 
+        printf("[Error] No database has been found!");
+        return 1;// Terminate.
     }
 
-    if(load_DB(argv[1]) == 0) return 1; // load db
-
-    int quit = 0;
-    while(!quit){// Loop until request quit;
-        quit = menu();
+    while(!menu()){
+        // Loop until request quit;
     }
 
-    return 0;
+    return 0;// Terminate.
 }

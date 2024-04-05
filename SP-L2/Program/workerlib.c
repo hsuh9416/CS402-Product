@@ -405,12 +405,12 @@ void print_top_m_sal(){
 }
 
 /**
- * function save_db()
+ * function save_DB()
  * This function saves the current array to a file according to the user's selection.
  * @param NONE
  * @return NONE
  */
-void save_db(){
+void save_DB(){
     int sel;
     printf("do you want to save the database?\n");  
     printf("Enter 1 for yes, else for no:");
