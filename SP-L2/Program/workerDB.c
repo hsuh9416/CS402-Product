@@ -48,7 +48,7 @@ int menu(){
             remove_emp(); // Remove the existing employee
             break;  
         case 7:
-            update_emp(1); // Update the existing employee
+            update_emp(); // Update the existing employee
             break;  
         case 8:
             print_top_m_sal(); // Print the M employees with the highest salaries
