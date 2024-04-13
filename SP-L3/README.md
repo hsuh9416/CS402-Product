@@ -23,7 +23,7 @@ gcc *.c -o basicstats -lm
 basicstats small.txt
 basicstats large.txt
 ```
-# Updates (Last update: 04.05.2024)
-(04.13.2024) Code updates from previous version.
+# Updates (Last update: 04.12.2024)
+(04.12.2024) Code updates from previous version.
 - Update readme and dates.
 - Modify some function to work better.
