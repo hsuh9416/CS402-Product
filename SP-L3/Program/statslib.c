@@ -9,7 +9,7 @@
  * within the file.
  * 
  * @author Haeun Suh (hsuh7@hawk.iit.edu)
- * @date 19 Nov 2023
+ * @date 12 Apr 2024
  */
 
 #include "statslib.h"
@@ -135,11 +135,14 @@ float* load_data(char *fn, int* size, int* malloc_size){
     int ret;
     int i = 0;
     while(1){
-        ret = fscanf(fp, "%f", &arr[(*size)++]);
+        ret = fscanf(fp, "%f", &arr[*size]);
+        
         if(ret == EOF){
             break;
         }
-        if((*size) >= (*malloc_size)){
+        else (*size)++;
+
+        if((*size) > (*malloc_size)){
             float* temp = (float*)malloc(sizeof(float)*(*malloc_size)*2); // Extended array
 
             for(int j=0; j<(*size); j++) temp[j] = arr[j];// Copy the value
@@ -151,8 +154,6 @@ float* load_data(char *fn, int* size, int* malloc_size){
             (*malloc_size) *= 2; // Update malloc_size
         }
     }
-
-    (*size)--; // decrease unintentional increment.
     
     close_file(fp); // Close the file finished its reading.
 

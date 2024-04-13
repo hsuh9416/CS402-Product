@@ -25,7 +25,7 @@
  *  3. Except sqrt in the math library, all statistical functions are implemented directly.
  * 
  * @author Haeun Suh (hsuh7@hawk.iit.edu)
- * @date 19 Nov 2023
+ * @date 12 Apr 2024
  * 
  */
 
@@ -35,7 +35,7 @@
  * function run_stats()
  * This function comprehensively runs the functions that are required regarding the given data file.
  * @param char *fn - The String value(or pointer of char/ array of char) that represents the file name to read.
- * @return returns 1 when error occurred failed.
+ * @return returns 1 when error occurred failed. Otherwise return 0.
  */
 int run_stats(char* fn){
     int size = 0; // Size of the data
@@ -52,8 +52,8 @@ int run_stats(char* fn){
     printf("  harmonic:%15.3f\n", get_harmonic(arr, size));
     printf("    median:%15.3f\n", get_median(arr, size));
     printf("    stddev:%15.3f\n", get_stddev(arr, size));   
-    printf("Unused array capacity:  %d", malloc_size - size);
-
+    printf("Unused array capacity:  %d\n", malloc_size - size);
+    
     free(arr); // free the arr
 
     return 0; // Successfully terminated.

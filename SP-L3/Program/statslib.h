@@ -7,7 +7,7 @@
  * required for the overall program.
  *
  * @author Haeun Suh (hsuh7@hawk.iit.edu)
- * @date 19 Nov 2023
+ * @date 12 Apr 2024
  * 
  */
 // Header file for "statslib.c"
