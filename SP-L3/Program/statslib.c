@@ -176,9 +176,9 @@ double get_average(float *arr, int size){
 /**
  * function get_mode()
  * This function returns the most frequent value from the given array.
- * @param float *arr - The pointer of the float-type array.
+ * @param float *arr - The pointer of the float-type array. * Already sorted from load_data()
  * @param int size - the size of the given array.
- * @return returns the most frequent value from the given array in float data type.
+ * @return returns the most frequent value from the given array in float data type. * If no duplicate data existed, the smallest value will be print out.
  */
 float get_mode(float *arr, int size){
     float mode = arr[0];
